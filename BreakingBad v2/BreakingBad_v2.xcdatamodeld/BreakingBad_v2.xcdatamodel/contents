@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Game" representedClassName="Game" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Team" inverseName="game" inverseEntity="Team"/>
+    </entity>
+    <entity name="Member" representedClassName="Member" syncable="YES" codeGenerationType="class">
+        <attribute name="img" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="quote" optional="YES" attributeType="String"/>
+        <attribute name="weapon" optional="YES" attributeType="String"/>
+        <relationship name="team" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team"/>
+        <relationship name="teamBoss" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="boss" inverseEntity="Team"/>
+    </entity>
+    <entity name="Team" representedClassName="Team" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <relationship name="boss" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="teamBoss" inverseEntity="Member"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="teams" inverseEntity="Game"/>
+        <relationship name="members" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Member" inverseName="team" inverseEntity="Member"/>
+    </entity>
+    <elements>
+        <element name="Game" positionX="-132.4091796875" positionY="163.3090515136719" width="128" height="59"/>
+        <element name="Member" positionX="-63.80169677734375" positionY="-84.16543579101562" width="128" height="119"/>
+        <element name="Team" positionX="-488.4752197265625" positionY="-4.54913330078125" width="128" height="89"/>
+    </elements>
+</model>
