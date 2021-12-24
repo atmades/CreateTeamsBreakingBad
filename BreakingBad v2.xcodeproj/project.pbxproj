@@ -21,13 +21,13 @@
 		B957C847275FD52100C6F67B /* Ext+UIAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B957C846275FD52100C6F67B /* Ext+UIAlertAction.swift */; };
 		B9B18A9E2757D217005EA9A1 /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18A9D2757D217005EA9A1 /* TeamCell.swift */; };
 		B9B18AA027581809005EA9A1 /* NewTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18A9F27581809005EA9A1 /* NewTeamViewController.swift */; };
-		B9B18AA327581860005EA9A1 /* NewTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AA227581860005EA9A1 /* NewTeamView.swift */; };
-		B9B18AA5275819EC005EA9A1 /* TeamTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AA4275819EC005EA9A1 /* TeamTopCell.swift */; };
+		B9B18AA327581860005EA9A1 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AA227581860005EA9A1 /* TeamView.swift */; };
+		B9B18AA5275819EC005EA9A1 /* TeamInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AA4275819EC005EA9A1 /* TeamInfoCell.swift */; };
 		B9B18AA7275868CB005EA9A1 /* Ext+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AA6275868CB005EA9A1 /* Ext+TextField.swift */; };
 		B9B18AA9275878C6005EA9A1 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AA8275878C6005EA9A1 /* MemberCell.swift */; };
 		B9B18AAD27592173005EA9A1 /* NewMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AAC27592173005EA9A1 /* NewMemberViewController.swift */; };
-		B9B18AB0275921B5005EA9A1 /* NewMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AAF275921B5005EA9A1 /* NewMemberView.swift */; };
-		B9B18AB227593BC1005EA9A1 /* NewMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AB127593BC1005EA9A1 /* NewMemberCell.swift */; };
+		B9B18AB0275921B5005EA9A1 /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AAF275921B5005EA9A1 /* MemberView.swift */; };
+		B9B18AB227593BC1005EA9A1 /* MemberInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AB127593BC1005EA9A1 /* MemberInfoCell.swift */; };
 		B9B18AB427594285005EA9A1 /* Ext+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AB327594285005EA9A1 /* Ext+ViewController.swift */; };
 		B9B18AB627594476005EA9A1 /* WeaponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AB527594476005EA9A1 /* WeaponCell.swift */; };
 		B9B18AB827594AFA005EA9A1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B18AB727594AFA005EA9A1 /* NetworkService.swift */; };
@@ -63,13 +63,13 @@
 		B957C846275FD52100C6F67B /* Ext+UIAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIAlertAction.swift"; sourceTree = "<group>"; };
 		B9B18A9D2757D217005EA9A1 /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		B9B18A9F27581809005EA9A1 /* NewTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTeamViewController.swift; sourceTree = "<group>"; };
-		B9B18AA227581860005EA9A1 /* NewTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTeamView.swift; sourceTree = "<group>"; };
-		B9B18AA4275819EC005EA9A1 /* TeamTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTopCell.swift; sourceTree = "<group>"; };
+		B9B18AA227581860005EA9A1 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
+		B9B18AA4275819EC005EA9A1 /* TeamInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoCell.swift; sourceTree = "<group>"; };
 		B9B18AA6275868CB005EA9A1 /* Ext+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+TextField.swift"; sourceTree = "<group>"; };
 		B9B18AA8275878C6005EA9A1 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		B9B18AAC27592173005EA9A1 /* NewMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemberViewController.swift; sourceTree = "<group>"; };
-		B9B18AAF275921B5005EA9A1 /* NewMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemberView.swift; sourceTree = "<group>"; };
-		B9B18AB127593BC1005EA9A1 /* NewMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemberCell.swift; sourceTree = "<group>"; };
+		B9B18AAF275921B5005EA9A1 /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
+		B9B18AB127593BC1005EA9A1 /* MemberInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoCell.swift; sourceTree = "<group>"; };
 		B9B18AB327594285005EA9A1 /* Ext+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+ViewController.swift"; sourceTree = "<group>"; };
 		B9B18AB527594476005EA9A1 /* WeaponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCell.swift; sourceTree = "<group>"; };
 		B9B18AB727594AFA005EA9A1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -117,22 +117,52 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B917551F2773A0BE00C6F434 /* Team */ = {
+		B917551F2773A0BE00C6F434 /* EditTeam */ = {
 			isa = PBXGroup;
 			children = (
 				B917551D2773A0B400C6F434 /* TeamViewController.swift */,
 				B917551B2773866600C6F434 /* TeamViewModel.swift */,
 			);
-			path = Team;
+			path = EditTeam;
 			sourceTree = "<group>";
 		};
-		B91755242773E78200C6F434 /* Member */ = {
+		B91755242773E78200C6F434 /* EditMember */ = {
 			isa = PBXGroup;
 			children = (
 				B91755202773E73000C6F434 /* MemberViewController.swift */,
 				B91755222773E77B00C6F434 /* MemberViewModel.swift */,
 			);
-			path = Member;
+			path = EditMember;
+			sourceTree = "<group>";
+		};
+		B91755272775785D00C6F434 /* TeamView */ = {
+			isa = PBXGroup;
+			children = (
+				B9B18AA227581860005EA9A1 /* TeamView.swift */,
+				B9DE01CB2760E4E7007090DF /* TeamBossCell.swift */,
+				B9B18AA4275819EC005EA9A1 /* TeamInfoCell.swift */,
+				B9B18AA8275878C6005EA9A1 /* MemberCell.swift */,
+			);
+			path = TeamView;
+			sourceTree = "<group>";
+		};
+		B91755282775789800C6F434 /* MemberView */ = {
+			isa = PBXGroup;
+			children = (
+				B9B18AAF275921B5005EA9A1 /* MemberView.swift */,
+				B9B18AB127593BC1005EA9A1 /* MemberInfoCell.swift */,
+				B9B18AB527594476005EA9A1 /* WeaponCell.swift */,
+			);
+			path = MemberView;
+			sourceTree = "<group>";
+		};
+		B9175529277578E600C6F434 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B91755272775785D00C6F434 /* TeamView */,
+				B91755282775789800C6F434 /* MemberView */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B9ADC88D2763768400B05FFF /* Extensions */ = {
@@ -164,10 +194,6 @@
 			children = (
 				B9B18A9F27581809005EA9A1 /* NewTeamViewController.swift */,
 				B9DE01D227610036007090DF /* NewTeamViewModel.swift */,
-				B9B18AA227581860005EA9A1 /* NewTeamView.swift */,
-				B9DE01CB2760E4E7007090DF /* TeamBossCell.swift */,
-				B9B18AA4275819EC005EA9A1 /* TeamTopCell.swift */,
-				B9B18AA8275878C6005EA9A1 /* MemberCell.swift */,
 			);
 			path = NewTeam;
 			sourceTree = "<group>";
@@ -177,20 +203,17 @@
 			children = (
 				B9B18AAC27592173005EA9A1 /* NewMemberViewController.swift */,
 				B957C83A275B93EB00C6F67B /* NewMemberViewModel.swift */,
-				B9B18AAF275921B5005EA9A1 /* NewMemberView.swift */,
-				B9B18AB127593BC1005EA9A1 /* NewMemberCell.swift */,
-				B9B18AB527594476005EA9A1 /* WeaponCell.swift */,
 			);
 			path = NewMember;
 			sourceTree = "<group>";
 		};
-		B9B18ABB27594B17005EA9A1 /* Service */ = {
+		B9B18ABB27594B17005EA9A1 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
 				B9B18AB727594AFA005EA9A1 /* NetworkService.swift */,
 				B9B18AB927594B11005EA9A1 /* NetworkDataFetcher.swift */,
 			);
-			path = Service;
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		B9E73F0B2756AF43000EDCBA = {
@@ -218,11 +241,12 @@
 				B9E73F192756AF43000EDCBA /* SceneDelegate.swift */,
 				B9ADC88D2763768400B05FFF /* Extensions */,
 				B9ADC88E2763769D00B05FFF /* Models */,
-				B9B18ABB27594B17005EA9A1 /* Service */,
-				B91755242773E78200C6F434 /* Member */,
+				B9B18ABB27594B17005EA9A1 /* NetworkService */,
+				B9175529277578E600C6F434 /* Views */,
+				B91755242773E78200C6F434 /* EditMember */,
 				B9B18AAE27592196005EA9A1 /* NewMember */,
 				B9B18AA127581817005EA9A1 /* NewTeam */,
-				B917551F2773A0BE00C6F434 /* Team */,
+				B917551F2773A0BE00C6F434 /* EditTeam */,
 				B9E73F372756B4C8000EDCBA /* Teams */,
 				B9E73F232756AF4D000EDCBA /* Assets.xcassets */,
 				B9E73F252756AF4D000EDCBA /* LaunchScreen.storyboard */,
@@ -368,8 +392,8 @@
 				B91755232773E77B00C6F434 /* MemberViewModel.swift in Sources */,
 				B9B18ABA27594B11005EA9A1 /* NetworkDataFetcher.swift in Sources */,
 				B9175526277507EC00C6F434 /* MemberSaveAlertProtocol.swift in Sources */,
-				B9B18AA5275819EC005EA9A1 /* TeamTopCell.swift in Sources */,
-				B9B18AB227593BC1005EA9A1 /* NewMemberCell.swift in Sources */,
+				B9B18AA5275819EC005EA9A1 /* TeamInfoCell.swift in Sources */,
+				B9B18AB227593BC1005EA9A1 /* MemberInfoCell.swift in Sources */,
 				B9B18AA7275868CB005EA9A1 /* Ext+TextField.swift in Sources */,
 				B9E73F412756B57E000EDCBA /* TeamsView.swift in Sources */,
 				B9E73F1C2756AF43000EDCBA /* TeamsViewController.swift in Sources */,
@@ -377,13 +401,13 @@
 				B9E73F3D2756B522000EDCBA /* Model.swift in Sources */,
 				B9B18AA9275878C6005EA9A1 /* MemberCell.swift in Sources */,
 				B9E73F3A2756B4DE000EDCBA /* TeamsViewModel.swift in Sources */,
-				B9B18AB0275921B5005EA9A1 /* NewMemberView.swift in Sources */,
+				B9B18AB0275921B5005EA9A1 /* MemberView.swift in Sources */,
 				B957C845275FBF9B00C6F67B /* Ext+TextView.swift in Sources */,
 				B9336D4A275FFD0200D58D0F /* AlertHelper.swift in Sources */,
 				B9B18AA027581809005EA9A1 /* NewTeamViewController.swift in Sources */,
 				B9B18AB827594AFA005EA9A1 /* NetworkService.swift in Sources */,
 				B957C847275FD52100C6F67B /* Ext+UIAlertAction.swift in Sources */,
-				B9B18AA327581860005EA9A1 /* NewTeamView.swift in Sources */,
+				B9B18AA327581860005EA9A1 /* TeamView.swift in Sources */,
 				B9B18AAD27592173005EA9A1 /* NewMemberViewController.swift in Sources */,
 				B957C83B275B93EB00C6F67B /* NewMemberViewModel.swift in Sources */,
 				B917551E2773A0B400C6F434 /* TeamViewController.swift in Sources */,

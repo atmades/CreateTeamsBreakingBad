@@ -9,15 +9,15 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-protocol NewMemberdelegate: AnyObject {
+protocol MemberInfoCellDelegate: AnyObject {
     func getRandomData()
     func nameDidEndEditing(_ textField: UITextField, text: String)
     func quoteDidEndEditing(text: String)
 }
 
-class NewMemberCell: UITableViewCell {
+class MemberInfoCell: UITableViewCell {
     static let reuseId = "NewMemberCell"
-    weak var delegate: NewMemberdelegate?
+    weak var delegate: MemberInfoCellDelegate?
     var quoteText = ""
     
 //    MARK: - UI Elements
@@ -88,8 +88,8 @@ class NewMemberCell: UITableViewCell {
         return label
     }()
     lazy private var setRandomButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor(named: String.color.green.rawValue)
+        let button = MainButton()
+//        button.backgroundColor = UIColor(named: String.color.green.rawValue)
         button.layer.cornerRadius = 2
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
@@ -200,7 +200,7 @@ class NewMemberCell: UITableViewCell {
 }
 
 // MARK: - extension UITextFieldDelegate
-extension NewMemberCell: UITextFieldDelegate {
+extension MemberInfoCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         nameTextField.layer.borderColor =  UIColor(named: String.color.gray70.rawValue)?.cgColor
     }
@@ -215,7 +215,7 @@ extension NewMemberCell: UITextFieldDelegate {
 }
 
 //    MARK: - extension UITextViewDelegate
-extension NewMemberCell: UITextViewDelegate {
+extension MemberInfoCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.layer.borderColor = UIColor(named: String.color.gray70.rawValue)?.cgColor
         if textView.textColor == .lightGray {

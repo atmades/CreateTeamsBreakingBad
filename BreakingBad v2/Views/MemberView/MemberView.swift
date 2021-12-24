@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol NewMemberDelegate: AnyObject {
+protocol MemberViewDelegate: AnyObject {
     func getRandomData()
     func nameDidEndEditing(text: String)
     func quoteDidEndEditing(text: String)
     func getWeapons(weapons: [String]?)
 }
 
-class NewMemberView: UIView {
+class MemberView: UIView {
     
-    weak var delegate: NewMemberDelegate?
+    weak var delegate: MemberViewDelegate?
     
     private var name: String?
     private var imageUrl: String?
@@ -29,7 +29,7 @@ class NewMemberView: UIView {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(WeaponCell.self, forCellReuseIdentifier: WeaponCell.reuseId)
-        tableView.register(NewMemberCell.self, forCellReuseIdentifier: NewMemberCell.reuseId)
+        tableView.register(MemberInfoCell.self, forCellReuseIdentifier: MemberInfoCell.reuseId)
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
@@ -102,7 +102,7 @@ class NewMemberView: UIView {
     }
 }
 //    MARK: - extension UITableViewDataSource
-extension NewMemberView: UITableViewDataSource {
+extension MemberView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weapons.count + 1
     }
@@ -111,7 +111,7 @@ extension NewMemberView: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: NewMemberCell.reuseId) as? NewMemberCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberInfoCell.reuseId) as? MemberInfoCell else { return UITableViewCell() }
             
             cell.delegate = self
             cell.setupNameAndAvatar(name: name, imageUrl: imageUrl)
@@ -131,7 +131,7 @@ extension NewMemberView: UITableViewDataSource {
 }
 
 //    MARK: - extension NewMemberdelegate
-extension NewMemberView: NewMemberdelegate {
+extension MemberView: MemberInfoCellDelegate {
     func quoteDidEndEditing(text: String) {
         delegate?.quoteDidEndEditing(text: text)
     }
@@ -144,7 +144,7 @@ extension NewMemberView: NewMemberdelegate {
 }
 
 //    MARK: - extension WeaponCellDelegate
-extension NewMemberView: WeaponCellDelegate {
+extension MemberView: WeaponCellDelegate {
     func didTapSelect(selected: Bool, index: Int) {
         let weapon = weapons[index]
         //  add/remove selected weapon

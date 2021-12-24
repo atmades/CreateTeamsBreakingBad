@@ -14,7 +14,7 @@ protocol NewTeamViewControllerDelegate: AnyObject {
 class NewTeamViewController: UIViewController {
     
     //    MARK: - Properties
-    private let newView = NewTeamView()
+    private let newView = TeamView()
     var viewModel: NewTeamViewModel
     weak var delegate: NewTeamViewControllerDelegate?
     
@@ -69,7 +69,7 @@ class NewTeamViewController: UIViewController {
 }
 
 //    MARK: - extension NewTeamDelegate
-extension NewTeamViewController: NewTeamDelegate {
+extension NewTeamViewController: TeamViewDelegate {
     func didTapMember(member: MemberTemp, index: Int) {
         let viewModelVC = MemberViewModelImpl(membersNames: viewModel.membersNames, member: member, index: index)
         let vc = MemberViewController(viewModel: viewModelVC)

@@ -14,7 +14,7 @@ protocol NewMemberVCDelegate: AnyObject {
 class NewMemberViewController: UIViewController {
     
     //    MARK: - Properties
-    private let newView = NewMemberView()
+    private let newView = MemberView()
     var viewModel: NewMemberViewModel
     weak var delegate: NewMemberVCDelegate?
     
@@ -62,7 +62,7 @@ class NewMemberViewController: UIViewController {
 }
 
 //    MARK: - extension NewMemberDelegate
-extension NewMemberViewController: NewMemberDelegate {
+extension NewMemberViewController: MemberViewDelegate {
     func getWeapons(weapons: [String]?) {
         viewModel.setSelectedWeapons(weapons: weapons)
     }

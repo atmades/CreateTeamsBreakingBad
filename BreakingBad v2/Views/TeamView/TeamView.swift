@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol NewTeamDelegate: AnyObject {
+protocol TeamViewDelegate: AnyObject {
     func addMember()
     func nameDidEndEditing(text: String)
     func getAllMembers(members: [MemberTemp])
@@ -15,10 +15,10 @@ protocol NewTeamDelegate: AnyObject {
     func didTapMember(member: MemberTemp, index: Int)
 }
 
-class NewTeamView: UIView {
+class TeamView: UIView {
     
     //    MARK: - Properties
-    weak var delegate: NewTeamDelegate?
+    weak var delegate: TeamViewDelegate?
     private var errorName = false
     
     private var members = [MemberTemp]() {
@@ -64,7 +64,7 @@ class NewTeamView: UIView {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(MemberCell.self, forCellReuseIdentifier: MemberCell.reuseId)
-        tableView.register(TeamTopCell.self, forCellReuseIdentifier: TeamTopCell.reuseId)
+        tableView.register(TeamInfoCell.self, forCellReuseIdentifier: TeamInfoCell.reuseId)
         tableView.register(TeamBossCell.self, forCellReuseIdentifier: TeamBossCell.reuseId)
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.backgroundColor = .black
@@ -95,7 +95,7 @@ class NewTeamView: UIView {
 }
 
 //    MARK: - extension UITableViewDataSource
-extension NewTeamView: UITableViewDataSource {
+extension TeamView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return members.count + 2
     }
@@ -107,7 +107,7 @@ extension NewTeamView: UITableViewDataSource {
             cell.updateCell(member: boss)
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamTopCell.reuseId) as? TeamTopCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamInfoCell.reuseId) as? TeamInfoCell else { return UITableViewCell() }
             
             cell.nameIsEmpty(isEmpty: errorName)
             cell.setNameTeam(nameTeam: nameTeam)
@@ -126,7 +126,7 @@ extension NewTeamView: UITableViewDataSource {
 }
 
 //    MARK: - extension UITableViewDataSource
-extension NewTeamView: UITableViewDelegate {
+extension TeamView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("NewTeamView UITableViewDelegate")
         let index = indexPath.row - 2
@@ -136,7 +136,7 @@ extension NewTeamView: UITableViewDelegate {
 }
 
 //    MARK: - extension TeamTopDelegate
-extension NewTeamView: TeamTopDelegate {
+extension TeamView: TeamInfoCellDelegate {
     func didTapAddMember() {
         delegate?.addMember()
     }
@@ -146,7 +146,7 @@ extension NewTeamView: TeamTopDelegate {
 }
 
 //    MARK: - extension MemberCellDelegate
-extension NewTeamView: MemberCellDelegate {
+extension TeamView: MemberCellDelegate {
     func goToDetail(index: Int) {
         let member = members[index]
         delegate?.didTapMember(member: member, index: index)

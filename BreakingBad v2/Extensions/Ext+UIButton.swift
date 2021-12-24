@@ -7,23 +7,23 @@
 
 import UIKit
 
-extension UIButton
-{
-    func applyGradient(colors: [CGColor])
-    {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = colors
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-        gradientLayer.frame = self.bounds
-        self.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    func createGradient(startColor: UIColor,endColor: UIColor ) {
-        let gradientColors: [CGColor] = [startColor.cgColor, endColor.cgColor]
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientColors
+
+class MainButton: UIButton {
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
         gradientLayer.frame = bounds
-        layer.insertSublayer(gradientLayer, at: 0)
     }
+
+    private lazy var gradientLayer: CAGradientLayer = {
+        let l = CAGradientLayer()
+        l.frame = self.bounds
+        let firstColor = UIColor(named: String.color.yellow.rawValue)?.cgColor ?? UIColor.yellow.cgColor
+        let secondColor = UIColor(named: String.color.blue.rawValue)?.cgColor ?? UIColor.yellow.cgColor
+        l.colors = [firstColor, secondColor]
+        l.startPoint = CGPoint(x: 0, y: 0.5)
+        l.endPoint = CGPoint(x: 1, y: 0.5)
+        layer.insertSublayer(l, at: 0)
+        return l
+    }()
 }

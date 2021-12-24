@@ -8,16 +8,16 @@
 import UIKit
 import SnapKit
 
-protocol TeamTopDelegate: AnyObject {
+protocol TeamInfoCellDelegate: AnyObject {
     func textFieldDidEndEditing(_ textField: UITextField, text: String)
     func didTapAddMember()
 }
 
-class TeamTopCell: UITableViewCell  {
+class TeamInfoCell: UITableViewCell  {
     
     //    MARK: - Properties
     static let reuseId = "NewTeamBossCell"
-    weak var delegate: TeamTopDelegate?
+    weak var delegate: TeamInfoCellDelegate?
     
 //    MARK: - UI Elements
     lazy private var nameTextField: UITextField = {
@@ -51,7 +51,7 @@ class TeamTopCell: UITableViewCell  {
         return label
     }()
     lazy private var addMemberButton: UIButton = {
-        let button = UIButton()
+        let button = MainButton()
         button.backgroundColor = UIColor(named: String.color.green.rawValue)
         button.layer.cornerRadius = 2
         button.setTitleColor(.black, for: .normal)
@@ -59,6 +59,7 @@ class TeamTopCell: UITableViewCell  {
         button.setTitle("Add Member", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapAddMember), for: .touchUpInside)
+       
         return button
     }()
     @objc
@@ -116,7 +117,7 @@ class TeamTopCell: UITableViewCell  {
 
 
 // MARK: - extension UITextFieldDelegate
-extension TeamTopCell: UITextFieldDelegate {
+extension TeamInfoCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         nameTextField.layer.borderColor =  UIColor(named: String.color.gray70.rawValue)?.cgColor
