@@ -31,8 +31,9 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 
 ## :hourglass_flowing_sand: In Progress
 
-- Save to CoreData (in progress)
-
+- Remove Member
+- Remove Team
+- Save to CoreData 
 - Refactoring ViewModels Member and Team
 
 
