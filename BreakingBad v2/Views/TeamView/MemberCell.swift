@@ -94,7 +94,6 @@ class MemberCell: UITableViewCell {
    }
     
     //    MARK: - private func
-    
     private func setupWeaponLabelStyle(isEmpty: Bool) {
         if isEmpty {
             weaponslabel.textColor = .lightGray
@@ -104,7 +103,6 @@ class MemberCell: UITableViewCell {
             weaponslabel.textColor = UIColor(named: String.color.blue.rawValue)
         }
     }
-    
     private func setupLayout() {
         contentView.addSubview(containerView)
         containerView.snp.makeConstraints { make in
@@ -172,6 +170,7 @@ class MemberCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .black
+        selectionStyle = .none
         setupLayout()
         setBossGesture()
         setGoToDetailGesture()

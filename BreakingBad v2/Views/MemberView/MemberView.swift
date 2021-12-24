@@ -49,20 +49,17 @@ class MemberView: UIView {
     }
     
     //    MARK: - public func
-    public func setupNameAndAvatar(name: String?,imageUrl: String?) {
+    
+    public func setupUI(name: String?,imageUrl: String?, quote: String?, selectedWeapons: [String]?) {
         self.name = name
         self.imageUrl = imageUrl
-        let index = IndexPath(row: 0, section: 0)
-        tableView.reloadRows(at: [index], with: .automatic)
+        if let quote = quote {
+            self.quote = quote
+        }
+        if let selectedWeapons = selectedWeapons {
+            self.selectedWeapons = Set(selectedWeapons)
+        }
     }
-    
-    public func setupQuote(quote: String?) {
-        guard let quote = quote else { return }
-        self.quote = quote
-        let index = IndexPath(row: 0, section: 0)
-        tableView.reloadRows(at: [index], with: .automatic)
-    }
-    
     public func setupRandom(name: String?, quote: String?, imageUrl: String? ) {
         self.name = name
         self.imageUrl = imageUrl
@@ -72,27 +69,18 @@ class MemberView: UIView {
         let index = IndexPath(row: 0, section: 0)
         tableView.reloadRows(at: [index], with: .automatic)
     }
-    
     public func nameValidation(isError: Bool, name: String?) {
         self.errorName = isError
         self.name = name
         let index = IndexPath(row: 0, section: 0)
         tableView.reloadRows(at: [index], with: .automatic)
     }
-    
     public func setWeapons(weapons: [String]) {
         self.weapons = weapons
         tableView.reloadData()
     }
-    
-    public func setSelectedWeapons(weapons: [String]?) {
-        guard let selectedWeapons = weapons else { return }
-        self.selectedWeapons = Set(selectedWeapons)
-        tableView.reloadData()
-    }
-    
     public func setAvatar(image: UIImage) {
-        
+        ////         Waiting for CoreData
     }
     
     //    MARK: - Init

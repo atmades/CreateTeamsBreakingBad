@@ -58,9 +58,7 @@ class MemberViewController: UIViewController {
         setupNavController()
         newView.delegate = self
         newView.setWeapons(weapons: viewModel.weapons)
-        newView.setupNameAndAvatar(name: viewModel.currentName, imageUrl: viewModel.img)
-        newView.setupQuote(quote: viewModel.quote)
-        newView.setSelectedWeapons(weapons: viewModel.selectedWeapons)
+        newView.setupUI(name: viewModel.currentName, imageUrl: viewModel.img, quote: viewModel.quote, selectedWeapons: viewModel.selectedWeapons)
     }
 }
 

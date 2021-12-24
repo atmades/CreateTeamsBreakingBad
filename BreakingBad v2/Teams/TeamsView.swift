@@ -98,6 +98,7 @@ extension TeamsView: UITableViewDataSource {
     }
 }
 
+// MARK: - extension UITableViewDelegate
 extension TeamsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("tableView didSelectRowAt")
