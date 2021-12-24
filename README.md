@@ -33,6 +33,7 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 
 - Remove Member
 - Remove Team
+- Search Team
 - Save to CoreData 
 - Refactoring ViewModels Member and Team
 
