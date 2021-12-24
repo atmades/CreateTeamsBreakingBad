@@ -52,3 +52,15 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 :white_check_mark: MVVM
 
 
+## 📱 Work example illustration:
+
+### Create Team
+![CreateTeam](https://user-images.githubusercontent.com/31052641/147358139-402ffb9b-3cc4-4bf2-a8e7-b24a03d5d881.gif)
+
+### Edit Member
+![EditMember](https://user-images.githubusercontent.com/31052641/147358170-795f0fc4-2b45-4a4d-b3c0-2f4f89a0fe5a.gif)
+
+### Team Validation
+![TeamValidation](https://user-images.githubusercontent.com/31052641/147358184-0c5c0408-7de5-4b4a-ab7a-4bd2edf6df16.gif)
+
+
