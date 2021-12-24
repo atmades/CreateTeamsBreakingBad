@@ -24,7 +24,6 @@ class MemberViewController: UIViewController {
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(didTapSaveMember))
         navigationItem.rightBarButtonItems = [saveButton]
     }
-        
     @objc
     private func didTapSaveMember() {
         viewModel.checkMember() {(error, result) in
@@ -67,6 +66,9 @@ class MemberViewController: UIViewController {
 
 //    MARK: - extension NewMemberDelegate
 extension MemberViewController: MemberViewDelegate {
+    func uploadImage() {
+        ////         Waiting for CoreData
+    }
     func getWeapons(weapons: [String]?) {
         viewModel.setSelectedWeapons(weapons: weapons)
     }

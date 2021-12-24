@@ -31,6 +31,7 @@ protocol MemberViewModel {
 }
 
 class MemberViewModelImpl: MemberViewModel {
+    
     //  properties
     var currentName: String?
     var quote: String?
@@ -38,10 +39,10 @@ class MemberViewModelImpl: MemberViewModel {
     var weapons = Weapon.weaponsString
     var selectedWeapons: [String]?
     var membersNames = Set<String>()
-    
     var oldName: String
     var index: Int
     
+    //  Func
     func setSelectedWeapons(weapons: [String]?) {
         self.selectedWeapons = weapons
     }
@@ -57,20 +58,17 @@ class MemberViewModelImpl: MemberViewModel {
     func setMembersNames(members: [MemberTemp]) {
         members.forEach { membersNames.insert($0.name) }
     }
-
     func checkMember(complition: @escaping (AlertsName?, MemberTemp?) -> ()) {
         guard let nameMember = self.currentName, !nameMember.isEmpty else {
             complition(AlertsName.memberNameIsEmpty, nil)
             return
         }
-        
         if nameMember != self.currentName {
             guard !membersNames.contains(nameMember) else {
                 complition(AlertsName.memberNameIsExist, nil)
                 return
             }
         }
-        
         guard !nameMember.trimmingCharacters(in: .whitespaces).isEmpty else {
             complition(AlertsName.memberNameIsIncorrect, nil)
             return

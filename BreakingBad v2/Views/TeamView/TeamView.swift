@@ -26,19 +26,8 @@ class TeamView: UIView {
             delegate?.getAllMembers(members: members)
         }
     }
-    private var boss: MemberTemp? {
-        didSet {
-            delegate?.getBoss(boss: boss)
-            let index = IndexPath(row: 0, section: 0)
-            tableView.reloadRows(at: [index], with: .automatic)
-        }
-    }
-    private var nameTeam: String? {
-        didSet {
-            let index = IndexPath(row: 1, section: 0)
-            tableView.reloadRows(at: [index], with: .automatic)
-        }
-    }
+    private var boss: MemberTemp?
+    private var nameTeam: String?
     
     //    MARK: - public func
     public func nameValidation(isError: Bool, nameTeam: String?) {
@@ -128,7 +117,6 @@ extension TeamView: UITableViewDataSource {
 //    MARK: - extension UITableViewDataSource
 extension TeamView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("NewTeamView UITableViewDelegate")
         let index = indexPath.row - 2
         let member = members[index]
         delegate?.didTapMember(member: member, index: index)
@@ -152,6 +140,12 @@ extension TeamView: MemberCellDelegate {
         delegate?.didTapMember(member: member, index: index)
     }
     func setBoss(index: Int) {
-        boss = members[index]
+        let boss = members[index]
+        delegate?.getBoss(boss: boss)
+
+        self.boss = boss
+        let index = IndexPath(row: 0, section: 0)
+        tableView.reloadRows(at: [index], with: .automatic)
+        
     }  
 }

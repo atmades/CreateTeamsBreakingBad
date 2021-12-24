@@ -54,10 +54,6 @@ class NewTeamViewController: UIViewController {
         super.viewWillAppear(animated)
         newView.updateMembers(members: viewModel.members)
         newView.setNameTeam(nameTeam: viewModel.nameTeam)
-//        DispatchQueue.main.async {
-//            self.newView.setNameTeam(nameTeam: self.viewModel.nameTeam)
-//        }
-        print("kokoko")
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,6 +12,7 @@ protocol MemberViewDelegate: AnyObject {
     func nameDidEndEditing(text: String)
     func quoteDidEndEditing(text: String)
     func getWeapons(weapons: [String]?)
+    func uploadImage()
 }
 
 class MemberView: UIView {
@@ -90,25 +91,27 @@ class MemberView: UIView {
         tableView.reloadData()
     }
     
+    public func setAvatar(image: UIImage) {
+        
+    }
+    
     //    MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         createSubviews()
         tableView.dataSource = self
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 //    MARK: - extension UITableViewDataSource
 extension MemberView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weapons.count + 1
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch indexPath.row {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberInfoCell.reuseId) as? MemberInfoCell else { return UITableViewCell() }
@@ -132,6 +135,9 @@ extension MemberView: UITableViewDataSource {
 
 //    MARK: - extension NewMemberdelegate
 extension MemberView: MemberInfoCellDelegate {
+    func didTapUpload() {
+        delegate?.uploadImage()
+    }
     func quoteDidEndEditing(text: String) {
         delegate?.quoteDidEndEditing(text: text)
     }

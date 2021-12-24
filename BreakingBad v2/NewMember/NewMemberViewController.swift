@@ -63,6 +63,14 @@ class NewMemberViewController: UIViewController {
 
 //    MARK: - extension NewMemberDelegate
 extension NewMemberViewController: MemberViewDelegate {
+    func uploadImage() {
+        ////         Waiting for CoreData
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
     func getWeapons(weapons: [String]?) {
         viewModel.setSelectedWeapons(weapons: weapons)
     }
@@ -81,3 +89,17 @@ extension NewMemberViewController: MemberViewDelegate {
 
 //    MARK: - extension MemberSaveAlert
 extension NewMemberViewController: MemberSaveAlert { }
+
+//    MARK: - extension UIImagePickerControllerDelegate
+extension NewMemberViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+////         Waiting for CoreData
+//        let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage
+        
+        picker.dismiss(animated: true)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+}

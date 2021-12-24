@@ -13,6 +13,7 @@ protocol MemberInfoCellDelegate: AnyObject {
     func getRandomData()
     func nameDidEndEditing(_ textField: UITextField, text: String)
     func quoteDidEndEditing(text: String)
+    func didTapUpload()
 }
 
 class MemberInfoCell: UITableViewCell {
@@ -43,7 +44,9 @@ class MemberInfoCell: UITableViewCell {
         return button
     }()
     @objc
-    private func didTapUpload() { }
+    private func didTapUpload() {
+        delegate?.didTapUpload()
+    }
     lazy private var nameTextField: UITextField = {
         let textField = UITextField()
         let redPlaceholderText = NSAttributedString(string: "Member Name",

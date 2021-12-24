@@ -53,7 +53,7 @@ class TeamViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         newView.updateMembers(members: viewModel.members)
-//        newView.setNameTeam(nameTeam: viewModel.currentNameTeam)
+        newView.setNameTeam(nameTeam: viewModel.currentNameTeam)
         newView.setBoss(boss: viewModel.boss)
     }
     override func viewDidLoad() {
@@ -73,7 +73,6 @@ extension TeamViewController: TeamViewDelegate {
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
     func getBoss(boss: MemberTemp?) {
         viewModel.setBoss(boss: boss)
     }
@@ -98,12 +97,13 @@ extension TeamViewController: NewMemberVCDelegate {
     }
 }
 
-//    MARK: - extension NewMemberVCDelegate
+//    MARK: - extension MemberVCDelegate
 extension TeamViewController: MemberVCDelegate {
     func getMember(member: MemberTemp, oldName: String, index: Int) {
         viewModel.updateMember(member: member, index: index, oldName: oldName)
         newView.updateMembers(members: viewModel.members)
     }
 }
+
 //    MARK: - extension TeamSaveAlert
 extension TeamViewController: TeamSaveAlert { }
