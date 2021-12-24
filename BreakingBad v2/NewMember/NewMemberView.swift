@@ -22,7 +22,7 @@ class NewMemberView: UIView {
     private var imageUrl: String?
     private var quote: String = String.placeHolders.quote.rawValue
     private var weapons = [String]()
-    private var selectedWeapons = [String]()
+    private var selectedWeapons = Set<String>()
     private var errorName = false
     
     //    MARK: - UI Elements
@@ -86,7 +86,7 @@ class NewMemberView: UIView {
     
     public func setSelectedWeapons(weapons: [String]?) {
         guard let selectedWeapons = weapons else { return }
-        self.selectedWeapons = selectedWeapons
+        self.selectedWeapons = Set(selectedWeapons)
         tableView.reloadData()
     }
     
@@ -147,19 +147,18 @@ extension NewMemberView: NewMemberdelegate {
 extension NewMemberView: WeaponCellDelegate {
     func didTapSelect(selected: Bool, index: Int) {
         let weapon = weapons[index]
-        
         //  add/remove selected weapon
         if selected {
-            selectedWeapons.append(weapon)
-            
+            selectedWeapons.insert(weapon)
         } else {
-            selectedWeapons.remove(at: index)
+            selectedWeapons.remove(weapon)
         }
-        
+        //  Check isEmpty and delegate
         if selectedWeapons.isEmpty {
             delegate?.getWeapons(weapons: nil)
         } else {
-            delegate?.getWeapons(weapons: selectedWeapons)
+            let selectedArray = Array(selectedWeapons)
+            delegate?.getWeapons(weapons: selectedArray)
         }
     }
 }
