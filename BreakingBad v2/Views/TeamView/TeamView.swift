@@ -10,9 +10,9 @@ import UIKit
 protocol TeamViewDelegate: AnyObject {
     func addMember()
     func nameDidEndEditing(text: String)
-    func getAllMembers(members: [MemberTemp])
-    func getBoss(boss: MemberTemp?)
-    func didTapMember(member: MemberTemp, index: Int)
+    func getAllMembers(members: [Member])
+    func getBoss(boss: Member?)
+    func didTapMember(member: Member, index: Int)
 }
 
 class TeamView: UIView {
@@ -21,12 +21,12 @@ class TeamView: UIView {
     weak var delegate: TeamViewDelegate?
     private var errorName = false
     
-    private var members = [MemberTemp]() {
+    private var members = [Member]() {
         didSet {
             delegate?.getAllMembers(members: members)
         }
     }
-    private var boss: MemberTemp?
+    private var boss: Member?
     private var nameTeam: String?
     
     //    MARK: - public func
@@ -36,7 +36,7 @@ class TeamView: UIView {
         let index = IndexPath(row: 1, section: 0)
         tableView.reloadRows(at: [index], with: .automatic)
     }
-    public func updateMembers(members: [MemberTemp]) {
+    public func updateMembers(members: [Member]) {
         self.members = members
         tableView.reloadData()
     }
@@ -45,7 +45,7 @@ class TeamView: UIView {
         self.nameTeam = nameTeam
     }
     
-    public func setBoss(boss: MemberTemp?) {
+    public func setBoss(boss: Member?) {
         self.boss = boss
     }
     
@@ -108,7 +108,7 @@ extension TeamView: UITableViewDataSource {
             cell.delegate = self
             let index = indexPath.row - 2
             let member = members[index]
-            cell.setupCell(name: member.name, quote: member.quote, img: member.img, weapons: member.weapon, index: index)
+            cell.setupCell(name: member.name, quote: member.quote, img: member.img, weapons: member.weapons, index: index)
             return cell
         }
     }

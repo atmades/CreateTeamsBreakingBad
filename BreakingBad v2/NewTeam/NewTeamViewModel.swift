@@ -10,55 +10,55 @@ import Foundation
 protocol NewTeamViewModel {
     //  properties
     var nameTeam: String? { get }
-    var members: [MemberTemp] { get }
-    var boss: MemberTemp? { get }
+    var members: [Member] { get }
+    var boss: Member? { get }
     
     var teamsNames: Set<String> { get }
     var membersNames: Set<String> { get }
     
     //  func
     func setName(name: String)
-    func updateMembers(members: [MemberTemp])
-    func updateMember(member: MemberTemp, index: Int, oldName: String)
-    func setBoss(boss: MemberTemp?)
-    func addMember(membber: MemberTemp)
-    func setMembersNames(members: [MemberTemp])
-    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:TeamTemp?) -> ())
+    func updateMembers(members: [Member])
+    func updateMember(member: Member, index: Int, oldName: String)
+    func setBoss(boss: Member?)
+    func addMember(membber: Member)
+    func setMembersNames(members: [Member])
+    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:Team?) -> ())
 }
 
 class NewTeamViewModelImpl: NewTeamViewModel {
     //  properties
     var nameTeam: String?
-    var boss: MemberTemp?
+    var boss: Member?
     var teamsNames: Set<String>
-    var members = [MemberTemp]()
+    var members = [Member]()
     var membersNames = Set<String>()
 
     //  func
-    func updateMembers(members: [MemberTemp]) {
+    func updateMembers(members: [Member]) {
         self.members = members
     }
     func setName(name: String) {
         self.nameTeam = name
     }
-    func setBoss(boss: MemberTemp?) {
+    func setBoss(boss: Member?) {
         self.boss = boss
     }
-    func addMember(membber: MemberTemp) {
+    func addMember(membber: Member) {
         self.members.append(membber)
         self.membersNames.insert(membber.name)
     }
-    func setMembersNames(members: [MemberTemp]) {
+    func setMembersNames(members: [Member]) {
         members.forEach { membersNames.insert($0.name) }
     }
-    func updateMember(member: MemberTemp, index: Int, oldName: String) {
+    func updateMember(member: Member, index: Int, oldName: String) {
         members[index] = member
         membersNames.remove(oldName)
         membersNames.insert(member.name)
     }
-    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:TeamTemp?) -> ()) {
+    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:Team?) -> ()) {
         var name: String
-        var boss: MemberTemp
+        var boss: Member
         
         guard let nameTeam = self.nameTeam, !nameTeam.isEmpty else {
             complition(AlertsName.tameNameIsEmpty, true, nil)
@@ -85,7 +85,7 @@ class NewTeamViewModelImpl: NewTeamViewModel {
         }
         name = nameTeam
         boss = bossTeam
-        let team = TeamTemp(name: name, users: members, boss: boss)
+        let team = Team(name: name, members: members, boss: boss)
         
         complition(nil,false, team)
     }

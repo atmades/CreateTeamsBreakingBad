@@ -27,18 +27,21 @@ struct Quote: Decodable {
 }
 
 // MARK: - FOR UI
-struct TeamTemp {
+struct Game {
     var name: String
-    var users: [MemberTemp]
-    var boss: MemberTemp
+    var teams: [Team]?
 }
-struct MemberTemp {
+struct Team {
+    var name: String
+    var members: [Member]
+    var boss: Member
+}
+struct Member {
     var name: String
     var img: String?
     var quote: String?
-    var weapon: [String]?
+    var weapons: [String]?
 }
-
 
 enum Weapon: String, CaseIterable {
     case nothing = "Barehanded"

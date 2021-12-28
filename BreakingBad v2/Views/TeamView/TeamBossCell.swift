@@ -67,7 +67,7 @@ class TeamBossCell: UITableViewCell {
     }
     
     //    MARK: - public func
-    public func updateCell(member: MemberTemp?) {
+    public func updateCell(member: Member?) {
         guard let boss = member
         else {
             bossNamelabel.text = "There is no boss"

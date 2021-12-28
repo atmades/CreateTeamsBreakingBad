@@ -20,10 +20,10 @@ protocol NewMemberViewModel {
     func setQuote(quote: String)
     func setImg(img: String)
     func setSelectedWeapons(weapons: [String]?)
-    func setMembersNames(members: [MemberTemp])
+    func setMembersNames(members: [Member])
     
     func getRandomData(completion: @escaping () -> ())
-    func checkMember(complition: @escaping(_ error: AlertsName?, _ result:MemberTemp?) -> ())
+    func checkMember(complition: @escaping(_ error: AlertsName?, _ result:Member?) -> ())
 }
 
 class NewMemberViewModelImpl: NewMemberViewModel {
@@ -47,10 +47,10 @@ class NewMemberViewModelImpl: NewMemberViewModel {
     func setImg(img: String) {
         self.img = img
     }
-    func setMembersNames(members: [MemberTemp]) {
+    func setMembersNames(members: [Member]) {
         members.forEach { membersNames.insert($0.name) }
     }
-    func checkMember(complition: @escaping (AlertsName?, MemberTemp?) -> ()) {
+    func checkMember(complition: @escaping (AlertsName?, Member?) -> ()) {
         guard let nameMember = self.name, !nameMember.isEmpty else {
             complition(AlertsName.memberNameIsEmpty, nil)
             return
@@ -63,7 +63,7 @@ class NewMemberViewModelImpl: NewMemberViewModel {
             complition(AlertsName.memberNameIsIncorrect, nil)
             return
         }
-        let member = MemberTemp(name: nameMember, img: img, quote: quote, weapon: selectedWeapons)
+        let member = Member(name: nameMember, img: img, quote: quote, weapons: selectedWeapons)
         complition(nil, member)
     }
     func getRandomData(completion: @escaping () -> ()) {

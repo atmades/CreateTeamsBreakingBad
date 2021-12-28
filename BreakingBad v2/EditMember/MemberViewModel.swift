@@ -24,10 +24,10 @@ protocol MemberViewModel {
     func setQuote(quote: String)
     func setImg(img: String)
     func setSelectedWeapons(weapons: [String]?)
-    func setMembersNames(members: [MemberTemp])
+    func setMembersNames(members: [Member])
     
     func getRandomData(completion: @escaping () -> ())
-    func checkMember(complition: @escaping(_ error: AlertsName?, _ result: MemberTemp?) -> ())
+    func checkMember(complition: @escaping(_ error: AlertsName?, _ result: Member?) -> ())
 }
 
 class MemberViewModelImpl: MemberViewModel {
@@ -55,10 +55,10 @@ class MemberViewModelImpl: MemberViewModel {
     func setImg(img: String) {
         self.img = img
     }
-    func setMembersNames(members: [MemberTemp]) {
+    func setMembersNames(members: [Member]) {
         members.forEach { membersNames.insert($0.name) }
     }
-    func checkMember(complition: @escaping (AlertsName?, MemberTemp?) -> ()) {
+    func checkMember(complition: @escaping (AlertsName?, Member?) -> ()) {
         guard let nameMember = self.currentName, !nameMember.isEmpty else {
             complition(AlertsName.memberNameIsEmpty, nil)
             return
@@ -73,7 +73,7 @@ class MemberViewModelImpl: MemberViewModel {
             complition(AlertsName.memberNameIsIncorrect, nil)
             return
         }
-        let member = MemberTemp(name: nameMember, img: img, quote: quote, weapon: selectedWeapons)
+        let member = Member(name: nameMember, img: img, quote: quote, weapons: selectedWeapons)
         complition(nil, member)
     }
     func getRandomData(completion: @escaping () -> ()) {
@@ -97,12 +97,12 @@ class MemberViewModelImpl: MemberViewModel {
     }
     
     //    MARK: - Init
-    init(membersNames: Set<String>, member: MemberTemp, index: Int) {
+    init(membersNames: Set<String>, member: Member, index: Int) {
         self.membersNames = membersNames
         self.currentName = member.name
         self.quote = member.quote
         self.img = member.img
-        self.selectedWeapons = member.weapon
+        self.selectedWeapons = member.weapons
         self.oldName = member.name
         self.index = index
     }

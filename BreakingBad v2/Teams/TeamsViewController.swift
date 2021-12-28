@@ -10,7 +10,7 @@ import UIKit
 class TeamsViewController: UIViewController {
     
     //    MARK: - Properties
-    var viewModel: TeamsViewModel = TeamsViewModelImpl()
+    var viewModel: TeamsViewModel
     private let newView = TeamsView()
     
     //    MARK: - NavController
@@ -25,6 +25,15 @@ class TeamsViewController: UIViewController {
         let vc = NewTeamViewController(viewModel: viewModelVC)
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: - Init
+    init(viewModel: TeamsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //    MARK: - LifeCycle
@@ -51,7 +60,7 @@ class TeamsViewController: UIViewController {
 
 //    MARK: - extension NewTeamViewControllerDelegate
 extension TeamsViewController: NewTeamViewControllerDelegate {
-    func getTeam(team: TeamTemp) {
+    func getTeam(team: Team) {
         viewModel.addNewTeam(team: team)
         newView.updateUI(teams: viewModel.teams)
     }
@@ -59,7 +68,7 @@ extension TeamsViewController: NewTeamViewControllerDelegate {
 
 //    MARK: - extension TeamViewControllerDelegate
 extension TeamsViewController:  TeamViewControllerDelegate {
-    func getTeam(team: TeamTemp, index: Int, oldNameTeam: String) {
+    func getTeam(team: Team, index: Int, oldNameTeam: String) {
         viewModel.updateTeam(team: team, index: index, oldNameTeam: oldNameTeam)
         newView.updateUI(teams: viewModel.teams)
     }
@@ -67,7 +76,7 @@ extension TeamsViewController:  TeamViewControllerDelegate {
 
 //    MARK: - extension TeamsViewDelegate
 extension TeamsViewController: TeamsViewDelegate {
-    func didTapTeam(team: TeamTemp, index: Int) {
+    func didTapTeam(team: Team, index: Int) {
         print("didTapTeam controller")
         let viewModelVC = TeamViewModelImpl(teamsNames: viewModel.teamsNames, team: team, index: index, nameTeam: team.name)
         let vc = TeamViewController(viewModel: viewModelVC)

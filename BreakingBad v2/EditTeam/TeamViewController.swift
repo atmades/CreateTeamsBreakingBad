@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TeamViewControllerDelegate: AnyObject {
-    func getTeam(team: TeamTemp, index: Int, oldNameTeam: String)
+    func getTeam(team: Team, index: Int, oldNameTeam: String)
 }
 
 class TeamViewController: UIViewController {
@@ -67,16 +67,16 @@ class TeamViewController: UIViewController {
 
 //    MARK: - extension NewTeamDelegate
 extension TeamViewController: TeamViewDelegate {
-    func didTapMember(member: MemberTemp, index: Int) {
+    func didTapMember(member: Member, index: Int) {
         let viewModelVC = MemberViewModelImpl(membersNames: viewModel.membersNames, member: member, index: index)
         let vc = MemberViewController(viewModel: viewModelVC)
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    func getBoss(boss: MemberTemp?) {
+    func getBoss(boss: Member?) {
         viewModel.setBoss(boss: boss)
     }
-    func getAllMembers(members: [MemberTemp]) {
+    func getAllMembers(members: [Member]) {
         viewModel.updateMembers(members: members)
     }
     func nameDidEndEditing(text: String) {
@@ -92,14 +92,14 @@ extension TeamViewController: TeamViewDelegate {
 
 //    MARK: - extension NewMemberVCDelegate
 extension TeamViewController: NewMemberVCDelegate {
-    func getMember(member: MemberTemp) {
+    func getMember(member: Member) {
         viewModel.addMember(membber: member)
     }
 }
 
 //    MARK: - extension MemberVCDelegate
 extension TeamViewController: MemberVCDelegate {
-    func getMember(member: MemberTemp, oldName: String, index: Int) {
+    func getMember(member: Member, oldName: String, index: Int) {
         viewModel.updateMember(member: member, index: index, oldName: oldName)
         newView.updateMembers(members: viewModel.members)
     }
