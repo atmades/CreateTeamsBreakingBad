@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B90C65EA2779C87300E4D69E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B90C65E82779C87300E4D69E /* Model.xcdatamodeld */; };
+		B90C65EC277B819900E4D69E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C65EB277B819900E4D69E /* CoreDataStack.swift */; };
+		B90C65EE277B823E00E4D69E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C65ED277B823E00E4D69E /* DataService.swift */; };
 		B917551A277228CB00C6F434 /* TeamSaveAlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9175519277228CB00C6F434 /* TeamSaveAlertProtocol.swift */; };
 		B917551C2773866600C6F434 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917551B2773866600C6F434 /* TeamViewModel.swift */; };
 		B917551E2773A0B400C6F434 /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917551D2773A0B400C6F434 /* TeamViewController.swift */; };
@@ -51,6 +53,8 @@
 		601849398A286B433227FAD9 /* Pods_BreakingBad_v2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingBad_v2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		885B40D49E789C87CF2D9E24 /* Pods-BreakingBad v2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingBad v2.debug.xcconfig"; path = "Target Support Files/Pods-BreakingBad v2/Pods-BreakingBad v2.debug.xcconfig"; sourceTree = "<group>"; };
 		B90C65E92779C87300E4D69E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		B90C65EB277B819900E4D69E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B90C65ED277B823E00E4D69E /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		B9175519277228CB00C6F434 /* TeamSaveAlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSaveAlertProtocol.swift; sourceTree = "<group>"; };
 		B917551B2773866600C6F434 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		B917551D2773A0B400C6F434 /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +246,8 @@
 			children = (
 				B9E73F172756AF43000EDCBA /* AppDelegate.swift */,
 				B9E73F192756AF43000EDCBA /* SceneDelegate.swift */,
+				B90C65EB277B819900E4D69E /* CoreDataStack.swift */,
+				B90C65ED277B823E00E4D69E /* DataService.swift */,
 				B9ADC88D2763768400B05FFF /* Extensions */,
 				B9ADC88E2763769D00B05FFF /* Models */,
 				B9B18ABB27594B17005EA9A1 /* NetworkService */,
@@ -382,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B90C65EC277B819900E4D69E /* CoreDataStack.swift in Sources */,
 				B9DE01D327610036007090DF /* NewTeamViewModel.swift in Sources */,
 				B917551C2773866600C6F434 /* TeamViewModel.swift in Sources */,
 				B9B18A9E2757D217005EA9A1 /* TeamCell.swift in Sources */,
@@ -408,6 +415,7 @@
 				B957C845275FBF9B00C6F67B /* Ext+TextView.swift in Sources */,
 				B9336D4A275FFD0200D58D0F /* AlertHelper.swift in Sources */,
 				B90C65EA2779C87300E4D69E /* Model.xcdatamodeld in Sources */,
+				B90C65EE277B823E00E4D69E /* DataService.swift in Sources */,
 				B9B18AA027581809005EA9A1 /* NewTeamViewController.swift in Sources */,
 				B9B18AB827594AFA005EA9A1 /* NetworkService.swift in Sources */,
 				B957C847275FD52100C6F67B /* Ext+UIAlertAction.swift in Sources */,

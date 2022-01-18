@@ -36,7 +36,7 @@ class MemberViewModelImpl: MemberViewModel {
     var currentName: String?
     var quote: String?
     var img: String?
-    var weapons = Weapon.weaponsString
+    var weapons = WeaponsBase.weaponsString
     var selectedWeapons: [String]?
     var membersNames = Set<String>()
     var oldName: String

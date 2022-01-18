@@ -27,29 +27,29 @@ struct Quote: Decodable {
 }
 
 // MARK: - FOR UI
-struct Game {
-    var name: String
-    var teams: [Team]?
-}
-struct Team {
-    var name: String
-    var members: [Member]
-    var boss: Member
-}
-struct Member {
-    var name: String
-    var img: String?
-    var quote: String?
-    var weapons: [String]?
-}
+//struct Game {
+//    var name: String?
+//    var teams: [Team]?
+//}
+//struct Team {
+//    var name: String
+//    var members: [Member]
+//    var boss: Member
+//}
+//struct Member {
+//    var name: String
+//    var img: String?
+//    var quote: String?
+//    var weapons: [String]?
+//}
 
-enum Weapon: String, CaseIterable {
+enum WeaponsBase: String, CaseIterable {
     case nothing = "Barehanded"
     case book = "Book"
     case coocies = "Coocies"
     case ball = "Ball"
 
     static var weaponsString: [String] {
-        return Weapon.allCases.map { $0.rawValue }
+        return WeaponsBase.allCases.map { $0.rawValue }
     }
 }
