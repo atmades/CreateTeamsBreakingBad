@@ -5,73 +5,34 @@
 //  Created by Максим on 27/01/2022.
 //
 import CoreData
+import UIKit
+import SnapKit
 
 protocol StorageManager {
     
     func saveContext()
     func addTeam(team: TeamUI)
-    func addMember(teamName: String, member: MemberUI, isBoss: Bool) -> Member
-    func getTeams() -> [Team]
-    func getMembers() -> [Member]
-    func getTeamByName(_ name: String) -> Team?
+//    func createMember(teamName: String, member: MemberUI, isBoss: Bool) -> Member
     func getTeams(complition: @escaping([Team])->())
-    func getMembers(teamName: String) -> [Member]?
     func updateTeam(name: String, teamNew: TeamUI)
+    func updateTeam(oldName: String, newMembers: [Member], newName: String)
+    func addTeam(teamName: String, members: [Member])
+    func getMember(complition: @escaping(Member)->())
+    
 }
 
 class StorageManagerImpl: StorageManager {
     
-    private var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "BreakingBadModel")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    private var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
+    var context: NSManagedObjectContext? {
+        let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext
+        return context
     }
     
-    func addTeam(team: TeamUI) {
-        let newTeam = Team(context: context)
-        newTeam.teamName = team.name
-        var members = [Member]()
-        team.members.forEach {
-            let member = addMember(teamName: team.name, member: $0, isBoss: $0.name == team.boss.name)
-            members.append(member)
-        }
-        let newMembers = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
-        for item in members {
-            newMembers?.add(item)
-        }
-        newTeam.member = newMembers
-        context.insert(newTeam)
-        saveContext()
-    }
+    var adapter = CoreDataAdapter()
     
-    func addMember(teamName: String, member: MemberUI, isBoss: Bool) -> Member {
-        let newMember = Member(context: context)
-        newMember.name = member.name
-        newMember.quote = member.quote
-        newMember.teamName = teamName
-        newMember.image = member.img
-        newMember.weapons = member.weapons?.joined(separator: ",")
-        newMember.isBoss = isBoss
-        
-        return newMember
-    }
-    
-//    func setMemberAsBoss(member: MemberUI) {
-//        let allMembers = getMembers()
-//        allMembers.forEach {
-//            $0.setValue($0.name == member.name, forKey: "isBoss")
-//        }
-//    }
-    
+    //    MARK: - Context
     func saveContext() {
+        guard let context = context else { return }
         if context.hasChanges {
             do {
                 try context.save()
@@ -83,33 +44,234 @@ class StorageManagerImpl: StorageManager {
         }
     }
     
-    func getTeams() -> [Team] {
-        let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
-        do {
-            let teams =  try context.fetch(fetchRequest)
-            print("В сторадж тимов всего \(teams.count)")
-            
-            return teams
-        } catch {
-            return []
+    //    MARK: - add Team
+    func addTeam(team: TeamUI) {
+        guard let context = context else { return }
+        let newTeam = Team(context: context)
+        newTeam.teamName = team.name
+        let members = adapter.getMembers(teamNew: team)
+        let newMembers = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
+        for item in members {
+            newMembers?.add(item)
         }
+        newTeam.member = newMembers
+        context.insert(newTeam)
+        saveContext()
     }
     
+    func addTeam(teamName: String, members: [Member]) {
+        guard let context = context else { return }
+        let newTeam = Team(context: context)
+        newTeam.teamName = teamName
+        let newMembers = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
+        for item in members {
+            newMembers?.add(item)
+        }
+        newTeam.member = newMembers
+        context.insert(newTeam)
+        saveContext()
+    }
+
+    //    MARK: - Get Teams
+
     func getTeams(complition: @escaping([Team])->())  {
+        guard let context = context else { return }
         let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
         do {
             let teams =  try context.fetch(fetchRequest)
             print("В сторадж тимов всего \(teams.count)")
-            
             complition(teams)
         } catch let error as NSError {
             print(error.localizedDescription)
         }
     }
     
+    private func getTeamByName(name: String, complition: @escaping(Team?)->() ) {
+        guard let context = context else { return }
+        let predicate = NSPredicate(format: "teamName == %@", name)
+        let fetchTeam = NSFetchRequest<Team>(entityName: "Team")
+        fetchTeam.predicate = predicate
+        fetchTeam.returnsObjectsAsFaults = false
+        do {
+            let teamResults = try context.fetch(fetchTeam) as? [Team]
+            complition(teamResults?.first)
+
+        } catch {
+            print(error)
+        }
+    }
+    
+    //    MARK: - update Team
+    func updateTeam(name: String, teamNew: TeamUI) {
+        guard let context = context else { return }
+        getTeamByName(name: name) { teamOld in
+            let newTeam = Team(context: context)
+            newTeam.teamName = teamNew.name
+            let members = self.adapter.getMembers(teamNew: teamNew)
+            let newMembers = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
+            for item in members {
+                newMembers?.add(item)
+            }
+            newTeam.member = newMembers
+            teamOld?.teamName = newTeam.teamName
+            teamOld?.member = newTeam.member
+            self.saveContext()
+        }
+    }
+    
+    func updateTeam(oldName: String, newMembers: [Member], newName: String) {
+        guard let context = context else { return }
+        getTeamByName(name: oldName) { teamOld in
+            let newTeam = Team(context: context)
+            newTeam.teamName = newName
+            let membersTemp = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
+            for item in newMembers {
+                membersTemp?.add(item)
+            }
+            newTeam.member = membersTemp
+            teamOld?.teamName = newTeam.teamName
+            teamOld?.member = newTeam.member
+            self.saveContext()
+        }
+    }
+    
+    //    MARK: - delete Team
+//    func deleteTeam(team: Team, complition: @escaping()->()) {
+//        context.delete(team as NSManagedObject)
+//        do {
+//            try context.save()
+//            complition()
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+//    }
+//
+//    func deleteTeamByName(name: String, complition: @escaping()->()) {
+//        guard let team = getTeamByName(name) else { return }
+//        context.delete(team as NSManagedObject)
+//        do {
+//            try context.save()
+//            complition()
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+//    }
+//
+//    func deleteTeamByName(name: String) {
+//        guard let team = getTeamByName(name) else { return }
+//        context.delete(team as NSManagedObject)
+//        do {
+//            try context.save()
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+//    }
+    
+    func getMember(complition: @escaping(Member)->()) {
+        guard let context = context else { return }
+        let newMember = Member(context: context)
+        complition(newMember)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class CoreDataAdapter {
+    static var context: NSManagedObjectContext? {
+       let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext
+       return context
+   }
+    
+    //    MARK: - For Storage
+    func getMembers(teamNew: TeamUI) -> [Member] {
+        var members = [Member]()
+        teamNew.members.forEach {
+            let member = self.createMember(teamName: teamNew.name, member: $0, isBoss: $0.name == teamNew.boss.name)
+            guard let member = member else { return }
+            members.append(member)
+        }
+        return members
+    }
+    
+    func createMember(teamName: String, member: MemberUI, isBoss: Bool) -> Member? {
+        if let context = CoreDataAdapter.context {
+            let newMember = Member(context: context)
+            newMember.name = member.name
+            newMember.quote = member.quote
+            newMember.teamName = teamName
+            newMember.image = member.img
+            newMember.weapons = member.weapons?.joined(separator: ",")
+            newMember.isBoss = isBoss
+            return newMember
+        }
+        return nil
+    }
     
     
     
+//    MARK: - For UI
+    func toMemberUI(members: NSOrderedSet?) -> [Member]? {
+//        For convert NSOrderedSet use .array as? YourType
+        let members = members?.array as? [Member]
+        return members
+    }
+    func convertMembersToMembersUI(members: [Member]?) -> [MemberUI]? {
+        guard let members = members else { return nil }
+        var membersUI = [MemberUI]()
+        for item in members {
+            guard let member = convertMemberToMemberUI(member: item) else { return nil }
+            membersUI.append(member)
+        }
+        guard !membersUI.isEmpty else { return nil }
+        return membersUI
+    }
+    func getBoss(members: [Member]?) -> Member? {
+        guard let members = members else { return nil }
+        for item in members {
+            if item.isBoss{
+                return item
+            }
+        }
+        return nil
+    }
+    func convertMemberToMemberUI(member: Member?) -> MemberUI? {
+        guard let memberName = member?.name else { return nil }
+        let img = member?.image
+        let quote = member?.quote
+        let weapons = member?.weapons?.components(separatedBy: ",")
+        return  MemberUI(name: memberName, img: img, quote: quote, weapons: weapons)
+    }
+    
+}
+
+
+//  MARK: - For Future
+
+
+// ------------- FOR SEARCHING OF MEMBERS -------------
+/*
     func getMembers() -> [Member] {
         let fetchRequest: NSFetchRequest<Member> = Member.fetchRequest()
         do {
@@ -118,7 +280,7 @@ class StorageManagerImpl: StorageManager {
             return []
         }
     }
-    
+ 
     func getMembers(teamName: String) -> [Member]? {
         let predicate = NSPredicate(format: "teamName == %@", teamName)
         let fetchRequest: NSFetchRequest<Member> = Member.fetchRequest()
@@ -131,93 +293,14 @@ class StorageManagerImpl: StorageManager {
             return []
         }
     }
-    
-    func getTeamByName(_ name: String) -> Team? {
-        let predicate = NSPredicate(format: "teamName == %@", name)
-          let fetchTeam = NSFetchRequest<Team>(entityName: "Team")
-          fetchTeam.predicate = predicate
-          fetchTeam.returnsObjectsAsFaults = false
-        do {
-          if let teamResults = try context.fetch(fetchTeam) as? [Team] {
-              return teamResults.first
-          }
-        } catch {
-          print(error)
-        }
-        return nil
-    }
-    
-    func getTeamByName(name: String, complition: @escaping(Team?)->() ) {
-        let predicate = NSPredicate(format: "teamName == %@", name)
-          let fetchTeam = NSFetchRequest<Team>(entityName: "Team")
-          fetchTeam.predicate = predicate
-          fetchTeam.returnsObjectsAsFaults = false
-        do {
-          if let teamResults = try context.fetch(fetchTeam) as? [Team] {
-              complition(teamResults.first)
-          }
-        } catch {
-          print(error)
-        }
-    }
-    
-    func updateTeam(name: String, teamNew: TeamUI) {
-//        let team = Team(context: context)
-//        team.name = newTeam.name
-//        do {
-//            context.setValue(newTeam, forKey: name)
-//            try context.save()
-//        } catch let error as NSError {
-//            print(error.localizedDescription)
-//        }
-        
-        
-        getTeamByName(name: name) { teamOld in
-            let newTeam = Team(context: self.context)
-            newTeam.teamName = teamNew.name
-            var members = [Member]()
-            teamNew.members.forEach {
-                let member = self.addMember(teamName: teamNew.name, member: $0, isBoss: $0.name == teamNew.boss.name)
-                members.append(member)
-            }
-            let newMembers = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
-            for item in members {
-                newMembers?.add(item)
-            }
-            newTeam.member = newMembers
-            teamOld?.teamName = newTeam.teamName
-            teamOld?.member = newTeam.member
-            self.saveContext()
-        }
-    }
-    
-    func deleteTeam(team: Team, complition: @escaping()->()) {
-        context.delete(team as NSManagedObject)
-        do {
-            try context.save()
-            complition()
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func deleteTeamByName(name: String, complition: @escaping()->()) {
-        guard let team = getTeamByName(name) else { return }
-        context.delete(team as NSManagedObject)
-        do {
-            try context.save()
-            complition()
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
-    func deleteTeamByName(name: String) {
-        guard let team = getTeamByName(name) else { return }
-        context.delete(team as NSManagedObject)
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
-}
+ 
+ 
+     func setMemberAsBoss(member: MemberUI) {
+         let allMembers = getMembers()
+         allMembers.forEach {
+             $0.setValue($0.name == member.name, forKey: "isBoss")
+         }
+     }
+ 
+ */
+
