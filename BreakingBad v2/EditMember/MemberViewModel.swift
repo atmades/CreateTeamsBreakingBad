@@ -24,10 +24,10 @@ protocol MemberViewModel {
     func setQuote(quote: String)
     func setImg(img: String)
     func setSelectedWeapons(weapons: [String]?)
-    func setMembersNames(members: [Member])
+    func setMembersNames(members: [MemberUI])
     
     func getRandomData(completion: @escaping () -> ())
-    func checkMember(complition: @escaping(_ error: AlertsName?, _ result: Member?) -> ())
+    func checkMember(complition: @escaping(_ error: AlertsName?, _ result: MemberUI?) -> ())
 }
 
 class MemberViewModelImpl: MemberViewModel {
@@ -55,10 +55,10 @@ class MemberViewModelImpl: MemberViewModel {
     func setImg(img: String) {
         self.img = img
     }
-    func setMembersNames(members: [Member]) {
+    func setMembersNames(members: [MemberUI]) {
         members.forEach { membersNames.insert($0.name) }
     }
-    func checkMember(complition: @escaping (AlertsName?, Member?) -> ()) {
+    func checkMember(complition: @escaping (AlertsName?, MemberUI?) -> ()) {
         guard let nameMember = self.currentName, !nameMember.isEmpty else {
             complition(AlertsName.memberNameIsEmpty, nil)
             return
@@ -73,7 +73,7 @@ class MemberViewModelImpl: MemberViewModel {
             complition(AlertsName.memberNameIsIncorrect, nil)
             return
         }
-        let member = Member(name: nameMember, img: img, quote: quote, weapons: selectedWeapons)
+        let member = MemberUI(name: nameMember, img: img, quote: quote, weapons: selectedWeapons)
         complition(nil, member)
     }
     func getRandomData(completion: @escaping () -> ()) {
@@ -97,7 +97,7 @@ class MemberViewModelImpl: MemberViewModel {
     }
     
     //    MARK: - Init
-    init(membersNames: Set<String>, member: Member, index: Int) {
+    init(membersNames: Set<String>, member: MemberUI, index: Int) {
         self.membersNames = membersNames
         self.currentName = member.name
         self.quote = member.quote

@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 protocol TeamsViewDelegate: AnyObject {
-    func didTapTeam(team: Team, index: Int)
+    func didTapTeam(team: TeamUI, index: Int)
 }
 
 class TeamsView: UIView {
     
     //    MARK: - Properties
-    private var teams = [Team]()
+    private var teams = [TeamUI]()
     weak var delegate: TeamsViewDelegate?
     
     //    MARK: - UI Elements
@@ -50,7 +50,7 @@ class TeamsView: UIView {
     }
     
     //    MARK: - public func
-    public func updateUI(teams: [Team]?) {
+    public func updateUI(teams: [TeamUI]?) {
         guard let newTeams = teams, !newTeams.isEmpty  else { return checkIsEmpty(isEmpty: true) }
         checkIsEmpty(isEmpty: false)
         self.teams = newTeams

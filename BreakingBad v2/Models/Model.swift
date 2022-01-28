@@ -31,17 +31,17 @@ struct Quote: Decodable {
 //    var name: String?
 //    var teams: [Team]?
 //}
-//struct Team {
-//    var name: String
-//    var members: [Member]
-//    var boss: Member
-//}
-//struct Member {
-//    var name: String
-//    var img: String?
-//    var quote: String?
-//    var weapons: [String]?
-//}
+struct TeamUI {
+    var name: String
+    var members: [MemberUI]
+    var boss: MemberUI
+}
+struct MemberUI {
+    var name: String
+    var img: String?
+    var quote: String?
+    var weapons: [String]?
+}
 
 enum WeaponsBase: String, CaseIterable {
     case nothing = "Barehanded"

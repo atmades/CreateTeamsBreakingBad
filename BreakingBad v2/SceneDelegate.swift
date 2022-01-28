@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let viewModel = TeamsViewModelImpl(gameName: "Bad")
+        let viewModel = TeamsViewModelImpl()
         let viewController = TeamsViewController(viewModel: viewModel)
         let navigation = UINavigationController(rootViewController: viewController)
         window.rootViewController = navigation

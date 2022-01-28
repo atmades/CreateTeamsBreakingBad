@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B90C65EA2779C87300E4D69E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B90C65E82779C87300E4D69E /* Model.xcdatamodeld */; };
+		B901FC0627A2F6A900D23C7A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901FC0527A2F6A900D23C7A /* StorageManager.swift */; };
+		B901FC0927A2F73100D23C7A /* BreakingBadModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B901FC0727A2F73100D23C7A /* BreakingBadModel.xcdatamodeld */; };
 		B90C65EC277B819900E4D69E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C65EB277B819900E4D69E /* CoreDataStack.swift */; };
 		B90C65EE277B823E00E4D69E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C65ED277B823E00E4D69E /* DataService.swift */; };
 		B917551A277228CB00C6F434 /* TeamSaveAlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9175519277228CB00C6F434 /* TeamSaveAlertProtocol.swift */; };
@@ -52,7 +53,8 @@
 		49F42E336E25DCC010705AEA /* Pods-BreakingBad v2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingBad v2.release.xcconfig"; path = "Target Support Files/Pods-BreakingBad v2/Pods-BreakingBad v2.release.xcconfig"; sourceTree = "<group>"; };
 		601849398A286B433227FAD9 /* Pods_BreakingBad_v2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingBad_v2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		885B40D49E789C87CF2D9E24 /* Pods-BreakingBad v2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingBad v2.debug.xcconfig"; path = "Target Support Files/Pods-BreakingBad v2/Pods-BreakingBad v2.debug.xcconfig"; sourceTree = "<group>"; };
-		B90C65E92779C87300E4D69E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		B901FC0527A2F6A900D23C7A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		B901FC0827A2F73100D23C7A /* BreakingBadModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BreakingBadModel.xcdatamodel; sourceTree = "<group>"; };
 		B90C65EB277B819900E4D69E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B90C65ED277B823E00E4D69E /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		B9175519277228CB00C6F434 /* TeamSaveAlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSaveAlertProtocol.swift; sourceTree = "<group>"; };
@@ -191,7 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				B9E73F3C2756B522000EDCBA /* Model.swift */,
-				B90C65E82779C87300E4D69E /* Model.xcdatamodeld */,
+				B901FC0527A2F6A900D23C7A /* StorageManager.swift */,
+				B901FC0727A2F73100D23C7A /* BreakingBadModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				B9B18AB627594476005EA9A1 /* WeaponCell.swift in Sources */,
 				B9B18AB427594285005EA9A1 /* Ext+ViewController.swift in Sources */,
 				B917551A277228CB00C6F434 /* TeamSaveAlertProtocol.swift in Sources */,
+				B901FC0627A2F6A900D23C7A /* StorageManager.swift in Sources */,
 				B91755212773E73000C6F434 /* MemberViewController.swift in Sources */,
 				B957C83F275BB5F500C6F67B /* Ext+UIButton.swift in Sources */,
 				B9DE01CC2760E4E7007090DF /* TeamBossCell.swift in Sources */,
@@ -414,7 +418,7 @@
 				B9B18AB0275921B5005EA9A1 /* MemberView.swift in Sources */,
 				B957C845275FBF9B00C6F67B /* Ext+TextView.swift in Sources */,
 				B9336D4A275FFD0200D58D0F /* AlertHelper.swift in Sources */,
-				B90C65EA2779C87300E4D69E /* Model.xcdatamodeld in Sources */,
+				B901FC0927A2F73100D23C7A /* BreakingBadModel.xcdatamodeld in Sources */,
 				B90C65EE277B823E00E4D69E /* DataService.swift in Sources */,
 				B9B18AA027581809005EA9A1 /* NewTeamViewController.swift in Sources */,
 				B9B18AB827594AFA005EA9A1 /* NetworkService.swift in Sources */,
@@ -621,13 +625,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B90C65E82779C87300E4D69E /* Model.xcdatamodeld */ = {
+		B901FC0727A2F73100D23C7A /* BreakingBadModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				B90C65E92779C87300E4D69E /* Model.xcdatamodel */,
+				B901FC0827A2F73100D23C7A /* BreakingBadModel.xcdatamodel */,
 			);
-			currentVersion = B90C65E92779C87300E4D69E /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			currentVersion = B901FC0827A2F73100D23C7A /* BreakingBadModel.xcdatamodel */;
+			path = BreakingBadModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

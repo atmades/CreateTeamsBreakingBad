@@ -11,8 +11,8 @@ protocol TeamViewModel {
     //  properties
     var oldNameTeam: String { get }
     var currentNameTeam: String? { get }
-    var members: [Member] { get }
-    var boss: Member? { get }
+    var members: [MemberUI] { get }
+    var boss: MemberUI? { get }
     
     //  heplers
     var teamsNames: Set<String> { get }
@@ -21,53 +21,53 @@ protocol TeamViewModel {
     
     //  func
     func setNewName(name: String)
-    func updateMembers(members: [Member])
-    func setBoss(boss: Member?)
-    func addMember(membber: Member)
-    func updateMember(member: Member, index: Int, oldName: String)
-    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:Team?) -> ())
+    func updateMembers(members: [MemberUI])
+    func setBoss(boss: MemberUI?)
+    func addMember(membber: MemberUI)
+    func updateMember(member: MemberUI, index: Int, oldName: String)
+    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:TeamUI?) -> ())
 }
 
 class TeamViewModelImpl: TeamViewModel {
     //  properties
     var oldNameTeam: String
     var currentNameTeam: String?
-    var boss: Member?
+    var boss: MemberUI?
     var teamsNames: Set<String>
-    var members = [Member]()
+    var members = [MemberUI]()
     
     //    heplers
     var membersNames = Set<String>()
     var index: Int
     
     //  func
-    func updateMembers(members: [Member]) {
+    func updateMembers(members: [MemberUI]) {
         self.members = members
     }
     func setNewName(name: String) {
         self.currentNameTeam = name
     }
     
-    func setBoss(boss: Member?) {
+    func setBoss(boss: MemberUI?) {
         self.boss = boss
     }
-    func addMember(membber: Member) {
+    func addMember(membber: MemberUI) {
         self.members.append(membber)
         self.membersNames.insert(membber.name)
     }
-    func setMembersNames(members: [Member]) {
+    func setMembersNames(members: [MemberUI]) {
         members.forEach { member in
             self.membersNames.insert(member.name)
         }
     }
-    func updateMember(member: Member, index: Int, oldName: String) {
+    func updateMember(member: MemberUI, index: Int, oldName: String) {
         members[index] = member
         membersNames.remove(oldName)
         membersNames.insert(member.name)
     }
-    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:Team?) -> ()) {
+    func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:TeamUI?) -> ()) {
         var name: String
-        var boss: Member
+        var boss: MemberUI
         
         //  Check Name
         guard let nameTeam = self.currentNameTeam, !nameTeam.isEmpty else {
@@ -97,12 +97,12 @@ class TeamViewModelImpl: TeamViewModel {
         }
         name = nameTeam
         boss = bossTeam
-        let team = Team(name: name, members: members, boss: boss)
+        let team = TeamUI(name: name, members: members, boss: boss)
         complition(nil,false, team)
     }
     
     //    MARK: - Init
-    init(teamsNames: Set<String>, team: Team, index: Int, nameTeam: String) {
+    init(teamsNames: Set<String>, team: TeamUI, index: Int, nameTeam: String) {
         self.teamsNames = teamsNames
         self.members = team.members
         self.currentNameTeam = team.name

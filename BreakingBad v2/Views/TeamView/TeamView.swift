@@ -10,9 +10,9 @@ import UIKit
 protocol TeamViewDelegate: AnyObject {
     func addMember()
     func nameDidEndEditing(text: String)
-    func getAllMembers(members: [Member])
-    func getBoss(boss: Member?)
-    func didTapMember(member: Member, index: Int)
+    func getAllMembers(members: [MemberUI])
+    func getBoss(boss: MemberUI?)
+    func didTapMember(member: MemberUI, index: Int)
 }
 
 class TeamView: UIView {
@@ -21,12 +21,12 @@ class TeamView: UIView {
     weak var delegate: TeamViewDelegate?
     private var errorName = false
     
-    private var members = [Member]() {
+    private var members = [MemberUI]() {
         didSet {
             delegate?.getAllMembers(members: members)
         }
     }
-    private var boss: Member?
+    private var boss: MemberUI?
     private var nameTeam: String?
     
     //    MARK: - public func
@@ -36,7 +36,7 @@ class TeamView: UIView {
         let index = IndexPath(row: 1, section: 0)
         tableView.reloadRows(at: [index], with: .automatic)
     }
-    public func updateMembers(members: [Member]) {
+    public func updateMembers(members: [MemberUI]) {
         self.members = members
         tableView.reloadData()
     }
@@ -45,7 +45,7 @@ class TeamView: UIView {
         self.nameTeam = nameTeam
     }
     
-    public func setBoss(boss: Member?) {
+    public func setBoss(boss: MemberUI?) {
         self.boss = boss
     }
     

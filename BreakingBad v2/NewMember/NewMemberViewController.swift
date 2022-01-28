@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NewMemberVCDelegate: AnyObject {
-    func getMember(member: Member)
+    func getMember(member: MemberUI)
 }
 
 class NewMemberViewController: UIViewController {

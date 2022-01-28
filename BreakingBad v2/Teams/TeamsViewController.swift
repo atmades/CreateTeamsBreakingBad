@@ -53,6 +53,7 @@ class TeamsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         setupNavController()
+        viewModel.getTeams()
         newView.updateUI(teams: viewModel.teams)
         newView.delegate = self
     }
@@ -60,7 +61,7 @@ class TeamsViewController: UIViewController {
 
 //    MARK: - extension NewTeamViewControllerDelegate
 extension TeamsViewController: NewTeamViewControllerDelegate {
-    func getTeam(team: Team) {
+    func getTeam(team: TeamUI) {
         viewModel.addNewTeam(team: team)
         newView.updateUI(teams: viewModel.teams)
     }
@@ -68,7 +69,7 @@ extension TeamsViewController: NewTeamViewControllerDelegate {
 
 //    MARK: - extension TeamViewControllerDelegate
 extension TeamsViewController:  TeamViewControllerDelegate {
-    func getTeam(team: Team, index: Int, oldNameTeam: String) {
+    func getTeam(team: TeamUI, index: Int, oldNameTeam: String) {
         viewModel.updateTeam(team: team, index: index, oldNameTeam: oldNameTeam)
         newView.updateUI(teams: viewModel.teams)
     }
@@ -76,7 +77,7 @@ extension TeamsViewController:  TeamViewControllerDelegate {
 
 //    MARK: - extension TeamsViewDelegate
 extension TeamsViewController: TeamsViewDelegate {
-    func didTapTeam(team: Team, index: Int) {
+    func didTapTeam(team: TeamUI, index: Int) {
         print("didTapTeam controller")
         let viewModelVC = TeamViewModelImpl(teamsNames: viewModel.teamsNames, team: team, index: index, nameTeam: team.name)
         let vc = TeamViewController(viewModel: viewModelVC)
