@@ -56,8 +56,6 @@ class TeamsViewController: UIViewController {
         viewModel.getTeams()
         newView.updateUI(teams: viewModel.teams)
         newView.delegate = self
-
-        
     }
 }
 
@@ -65,7 +63,6 @@ class TeamsViewController: UIViewController {
 extension TeamsViewController: NewTeamViewControllerDelegate {
     func getTeam(team: TeamUI) {
         viewModel.addNewTeam(team: team)
-        newView.updateUI(teams: viewModel.teams)
     }
 }
 
@@ -93,7 +90,6 @@ extension TeamsViewController: TeamsViewDelegate {
 //            self.newView.deleteRow(index: index, indexPath: indexPath)
             self.newView.updateUI(teams: self.viewModel.teams)
         }
-
     }
 }
 

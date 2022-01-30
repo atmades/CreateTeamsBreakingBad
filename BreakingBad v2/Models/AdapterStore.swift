@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AdapterStore {
-    func getTeams(complition: @escaping([Team])->())
+    func getTeams(complition: @escaping([TeamUI])->())
     func updateTeam(oldName: String, teamNew: TeamUI)
     func addTeam(team: TeamUI)
     func deleteTeamByName(name: String, complition: @escaping()->())

@@ -27,23 +27,8 @@ class TeamsViewModelImpl: TeamsViewModel {
     var storeAdapter: AdapterStore = AdapterCoreData()
     
     func getTeams() {
-        storeAdapter.getTeams() { teams in
-            var teamsUI = [TeamUI]()
-            print("в viewModel получили \(teams.count)")
-            print(teams)
-            for item in teams {
-                let teamName = item.teamName
-                let members = self.storeAdapter.toMemberUI(members: item.member)
-                let membersUI = self.storeAdapter.convertMembersToMembersUI(members: members)
-                let boss = self.storeAdapter.getBoss(members: members)
-                let bossUI = self.storeAdapter.convertMemberToMemberUI(member: boss)
-
-                if let name = teamName, let members = membersUI, let boss = bossUI {
-                    let team = TeamUI(name: name, members: members, boss: boss)
-                    teamsUI.append(team)
-                }
-            }
-            print("в viewModel преобразовали \(teamsUI.count)")
+        storeAdapter.getTeams() { teamsUI in
+            print("в viewModel получили \(teamsUI.count)")
             self.teams = teamsUI
             for team in self.teams {
                 self.teamsNames.insert(team.name)
@@ -74,7 +59,6 @@ class TeamsViewModelImpl: TeamsViewModel {
         self.teams.remove(at: index)
         self.teamsNames.remove(teamName)
         storeAdapter.deleteTeamByName(name: teamName) {
- 
             complition()
         }
     }
@@ -84,7 +68,6 @@ class TeamsViewModelImpl: TeamsViewModel {
     
     //    MARK: - Init
     init() {
-        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

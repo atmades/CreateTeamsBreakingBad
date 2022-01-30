@@ -13,9 +13,25 @@ class AdapterCoreData: AdapterStore {
     var storageManager: StorageManager = StorageManagerImpl()
     
     //    MARK: - For Storage
-    func getTeams(complition: @escaping([Team])->()) {
+    func getTeams(complition: @escaping([TeamUI])->()) {
         storageManager.getTeams { teams in
-            complition(teams)
+            var teamsUI = [TeamUI]()
+            print("в viewModel получили \(teams.count)")
+            print(teams)
+            for item in teams {
+                let teamName = item.teamName
+                let members = self.toMemberUI(members: item.member)
+                let membersUI = self.convertMembersToMembersUI(members: members)
+                let boss = self.getBoss(members: members)
+                let bossUI = self.convertMemberToMemberUI(member: boss)
+
+                if let name = teamName, let members = membersUI, let boss = bossUI {
+                    let team = TeamUI(name: name, members: members, boss: boss)
+                    teamsUI.append(team)
+                }
+            }
+            print("в AdapterCoreData преобразовали \(teamsUI.count)")
+            complition(teamsUI)
         }
     }
     func addTeam(team: TeamUI) {
