@@ -2,11 +2,15 @@
 
 
 ## 🔥 Description
-:white_check_mark: Create / Edit teams
+:white_check_mark: Create / Edit / Delete teams
 
 :white_check_mark: Add / Edit Members of Team
 
 :white_check_mark: Display a list of teams
+
+:white_check_mark: Save to CoreData 
+
+:white_check_mark: Adapter design pattern for connect CoreDataStorage and Models of UI 
 
 
 #### :people_holding_hands: The Team consists of:
@@ -32,9 +36,7 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 ## :hourglass_flowing_sand: In Progress
 
 - Remove Member
-- Remove Team
 - Search Team
-- Save to CoreData 
 - Refactoring ViewModels Member and Team
 
 
@@ -52,6 +54,8 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 :white_check_mark: API REST
 
 :white_check_mark: MVVM
+
+:white_check_mark: CoreData 
 
 
 ## 📱 Work example illustration:
