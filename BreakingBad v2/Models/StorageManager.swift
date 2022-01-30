@@ -6,32 +6,24 @@
 //
 import CoreData
 import UIKit
-import SnapKit
 
 protocol StorageManager {
     
-    func saveContext()
-    func addTeam(team: TeamUI)
-//    func createMember(teamName: String, member: MemberUI, isBoss: Bool) -> Member
     func getTeams(complition: @escaping([Team])->())
-    func updateTeam(name: String, teamNew: TeamUI)
     func updateTeam(oldName: String, newMembers: [Member], newName: String)
     func addTeam(teamName: String, members: [Member])
     func getMember(complition: @escaping(Member)->())
-    
 }
 
 class StorageManagerImpl: StorageManager {
     
+    //    MARK: - Context
     var context: NSManagedObjectContext? {
         let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext
         return context
     }
     
-    var adapter = CoreDataAdapter()
-    
-    //    MARK: - Context
-    func saveContext() {
+    private func saveContext() {
         guard let context = context else { return }
         if context.hasChanges {
             do {
@@ -45,20 +37,6 @@ class StorageManagerImpl: StorageManager {
     }
     
     //    MARK: - add Team
-    func addTeam(team: TeamUI) {
-        guard let context = context else { return }
-        let newTeam = Team(context: context)
-        newTeam.teamName = team.name
-        let members = adapter.getMembers(teamNew: team)
-        let newMembers = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
-        for item in members {
-            newMembers?.add(item)
-        }
-        newTeam.member = newMembers
-        context.insert(newTeam)
-        saveContext()
-    }
-    
     func addTeam(teamName: String, members: [Member]) {
         guard let context = context else { return }
         let newTeam = Team(context: context)
@@ -73,7 +51,6 @@ class StorageManagerImpl: StorageManager {
     }
 
     //    MARK: - Get Teams
-
     func getTeams(complition: @escaping([Team])->())  {
         guard let context = context else { return }
         let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
@@ -85,7 +62,6 @@ class StorageManagerImpl: StorageManager {
             print(error.localizedDescription)
         }
     }
-    
     private func getTeamByName(name: String, complition: @escaping(Team?)->() ) {
         guard let context = context else { return }
         let predicate = NSPredicate(format: "teamName == %@", name)
@@ -102,23 +78,6 @@ class StorageManagerImpl: StorageManager {
     }
     
     //    MARK: - update Team
-    func updateTeam(name: String, teamNew: TeamUI) {
-        guard let context = context else { return }
-        getTeamByName(name: name) { teamOld in
-            let newTeam = Team(context: context)
-            newTeam.teamName = teamNew.name
-            let members = self.adapter.getMembers(teamNew: teamNew)
-            let newMembers = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
-            for item in members {
-                newMembers?.add(item)
-            }
-            newTeam.member = newMembers
-            teamOld?.teamName = newTeam.teamName
-            teamOld?.member = newTeam.member
-            self.saveContext()
-        }
-    }
-    
     func updateTeam(oldName: String, newMembers: [Member], newName: String) {
         guard let context = context else { return }
         getTeamByName(name: oldName) { teamOld in
@@ -133,6 +92,13 @@ class StorageManagerImpl: StorageManager {
             teamOld?.member = newTeam.member
             self.saveContext()
         }
+    }
+    
+    //    MARK: - get Member
+    func getMember(complition: @escaping(Member)->()) {
+        guard let context = context else { return }
+        let newMember = Member(context: context)
+        complition(newMember)
     }
     
     //    MARK: - delete Team
@@ -166,12 +132,6 @@ class StorageManagerImpl: StorageManager {
 //            print(error.localizedDescription)
 //        }
 //    }
-    
-    func getMember(complition: @escaping(Member)->()) {
-        guard let context = context else { return }
-        let newMember = Member(context: context)
-        complition(newMember)
-    }
 }
 
 

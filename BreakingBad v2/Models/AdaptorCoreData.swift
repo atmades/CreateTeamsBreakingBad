@@ -7,19 +7,8 @@
 
 import Foundation
 
-protocol AdapterCoreData {
-    func getTeams(complition: @escaping([Team])->())
-    func updateTeam(oldName: String, teamNew: TeamUI)
-    func addTeam(team: TeamUI)
-    
-    func toMemberUI(members: NSOrderedSet?) -> [Member]?
-    func getBoss(members: [Member]?) -> Member?
-    func convertMembersToMembersUI(members: [Member]?) -> [MemberUI]?
-    func convertMemberToMemberUI(member: Member?) -> MemberUI?
-    
-}
 
-class AdapterCoreDataImpl: AdapterCoreData {
+class AdapterCoreData: AdapterStore {
     
     var storageManager: StorageManager = StorageManagerImpl()
     

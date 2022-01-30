@@ -22,7 +22,7 @@ class TeamsViewModelImpl: TeamsViewModel {
     var teamsNames = Set<String>()
     var teams: [TeamUI] = [TeamUI]()
     
-    var storeAdapter: AdapterCoreData = AdapterCoreDataImpl()
+    var storeAdapter: AdapterStore = AdapterCoreData()
     
     func getTeams() {
         storeAdapter.getTeams() { teams in

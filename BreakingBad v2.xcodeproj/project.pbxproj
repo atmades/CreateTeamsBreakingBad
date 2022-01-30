@@ -10,6 +10,7 @@
 		B901FC0627A2F6A900D23C7A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901FC0527A2F6A900D23C7A /* StorageManager.swift */; };
 		B901FC0927A2F73100D23C7A /* BreakingBadModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B901FC0727A2F73100D23C7A /* BreakingBadModel.xcdatamodeld */; };
 		B901FC0B27A47A8400D23C7A /* AdaptorCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901FC0A27A47A8400D23C7A /* AdaptorCoreData.swift */; };
+		B901FC0D27A47BFE00D23C7A /* AdapterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901FC0C27A47BFE00D23C7A /* AdapterStore.swift */; };
 		B90C65EC277B819900E4D69E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C65EB277B819900E4D69E /* CoreDataStack.swift */; };
 		B917551A277228CB00C6F434 /* TeamSaveAlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9175519277228CB00C6F434 /* TeamSaveAlertProtocol.swift */; };
 		B917551C2773866600C6F434 /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917551B2773866600C6F434 /* TeamViewModel.swift */; };
@@ -56,6 +57,7 @@
 		B901FC0527A2F6A900D23C7A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		B901FC0827A2F73100D23C7A /* BreakingBadModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BreakingBadModel.xcdatamodel; sourceTree = "<group>"; };
 		B901FC0A27A47A8400D23C7A /* AdaptorCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptorCoreData.swift; sourceTree = "<group>"; };
+		B901FC0C27A47BFE00D23C7A /* AdapterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterStore.swift; sourceTree = "<group>"; };
 		B90C65EB277B819900E4D69E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B9175519277228CB00C6F434 /* TeamSaveAlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSaveAlertProtocol.swift; sourceTree = "<group>"; };
 		B917551B2773866600C6F434 /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				B9E73F3C2756B522000EDCBA /* Model.swift */,
+				B901FC0C27A47BFE00D23C7A /* AdapterStore.swift */,
 				B901FC0527A2F6A900D23C7A /* StorageManager.swift */,
 				B901FC0A27A47A8400D23C7A /* AdaptorCoreData.swift */,
 				B901FC0727A2F73100D23C7A /* BreakingBadModel.xcdatamodeld */,
@@ -404,6 +407,7 @@
 				B957C83F275BB5F500C6F67B /* Ext+UIButton.swift in Sources */,
 				B9DE01CC2760E4E7007090DF /* TeamBossCell.swift in Sources */,
 				B957C83D275BB09E00C6F67B /* Ext+String.swift in Sources */,
+				B901FC0D27A47BFE00D23C7A /* AdapterStore.swift in Sources */,
 				B91755232773E77B00C6F434 /* MemberViewModel.swift in Sources */,
 				B9B18ABA27594B11005EA9A1 /* NetworkDataFetcher.swift in Sources */,
 				B9175526277507EC00C6F434 /* MemberSaveAlertProtocol.swift in Sources */,
