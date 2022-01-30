@@ -10,6 +10,7 @@ import SnapKit
 
 protocol TeamsViewDelegate: AnyObject {
     func didTapTeam(team: TeamUI, index: Int)
+    func deleteTeam(index: Int, indexPath: IndexPath)
 }
 
 class TeamsView: UIView {
@@ -57,6 +58,14 @@ class TeamsView: UIView {
         tableView.reloadData()
     }
     
+    public func deleteRow(index: Int, indexPath: IndexPath) {
+        print("стукнули во deleteRow view")
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    public func reload() {
+        tableView.reloadData()
+    }
     //    MARK: - Setup Layout
     private func createSubviews() {
         addSubview(tableView)
@@ -95,6 +104,15 @@ extension TeamsView: UITableViewDataSource {
         let team = teams[indexPath.row]
         cell.setupUI(teamName: team.name)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        print("стукнули во view")
+        delegate?.deleteTeam(index: indexPath.row, indexPath: indexPath)
+//        tableView.deleteRows(at: [indexPath], with: .automatic)
+       
+        
     }
 }
 

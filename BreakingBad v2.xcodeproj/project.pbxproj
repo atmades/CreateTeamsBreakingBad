@@ -196,8 +196,8 @@
 			children = (
 				B9E73F3C2756B522000EDCBA /* Model.swift */,
 				B901FC0C27A47BFE00D23C7A /* AdapterStore.swift */,
-				B901FC0527A2F6A900D23C7A /* StorageManager.swift */,
 				B901FC0A27A47A8400D23C7A /* AdaptorCoreData.swift */,
+				B901FC0527A2F6A900D23C7A /* StorageManager.swift */,
 				B901FC0727A2F73100D23C7A /* BreakingBadModel.xcdatamodeld */,
 			);
 			path = Models;

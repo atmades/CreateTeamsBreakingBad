@@ -15,6 +15,8 @@ protocol TeamsViewModel {
     func addNewTeam(team: TeamUI)
     func updateTeam(team: TeamUI, index: Int, oldNameTeam: String)
     func removeTeam(index: Int)
+    func deleteTeamByName(index: Int,complition: @escaping()->())
+    func deleteAll()
 }
 
 class TeamsViewModelImpl: TeamsViewModel {
@@ -27,6 +29,8 @@ class TeamsViewModelImpl: TeamsViewModel {
     func getTeams() {
         storeAdapter.getTeams() { teams in
             var teamsUI = [TeamUI]()
+            print("в viewModel получили \(teams.count)")
+            print(teams)
             for item in teams {
                 let teamName = item.teamName
                 let members = self.storeAdapter.toMemberUI(members: item.member)
@@ -39,7 +43,11 @@ class TeamsViewModelImpl: TeamsViewModel {
                     teamsUI.append(team)
                 }
             }
+            print("в viewModel преобразовали \(teamsUI.count)")
             self.teams = teamsUI
+            for team in self.teams {
+                self.teamsNames.insert(team.name)
+            }
         }
     }
  
@@ -59,6 +67,19 @@ class TeamsViewModelImpl: TeamsViewModel {
         let teamName = teams[index].name
         teams.remove(at: index)
         teamsNames.remove(teamName)
+    }
+    func deleteTeamByName(index: Int, complition: @escaping()->()) {
+        print("вошли в deleteTeamByName VIEWMODEL")
+        let teamName = teams[index].name
+        self.teams.remove(at: index)
+        self.teamsNames.remove(teamName)
+        storeAdapter.deleteTeamByName(name: teamName) {
+ 
+            complition()
+        }
+    }
+    func deleteAll() {
+        storeAdapter.deleteAll()
     }
     
     //    MARK: - Init

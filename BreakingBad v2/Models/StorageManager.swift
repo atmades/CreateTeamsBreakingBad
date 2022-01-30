@@ -13,6 +13,8 @@ protocol StorageManager {
     func updateTeam(oldName: String, newMembers: [Member], newName: String)
     func addTeam(teamName: String, members: [Member])
     func getMember(complition: @escaping(Member)->())
+    func deleteTeamByName(name: String, complition: @escaping()->())
+    func deleteAll()
 }
 
 class StorageManagerImpl: StorageManager {
@@ -69,8 +71,8 @@ class StorageManagerImpl: StorageManager {
         fetchTeam.predicate = predicate
         fetchTeam.returnsObjectsAsFaults = false
         do {
-            let teamResults = try context.fetch(fetchTeam) as? [Team]
-            complition(teamResults?.first)
+            let teamResults = try context.fetch(fetchTeam)
+            complition(teamResults.first)
 
         } catch {
             print(error)
@@ -102,6 +104,26 @@ class StorageManagerImpl: StorageManager {
     }
     
     //    MARK: - delete Team
+    func deleteTeamByName(name: String, complition: @escaping()->()) {
+        guard let context = context else { return }
+        getTeamByName(name: name) { team in
+            guard let team = team else { return }
+            context.delete(team)
+            do {
+                print("сча будет трай сейв контекст")
+                try context.save()
+                complition()
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func deleteAll() {
+        (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.deleteAll()
+    }
+    
+    //    MARK: - delete Team Other Options
 //    func deleteTeam(team: Team, complition: @escaping()->()) {
 //        context.delete(team as NSManagedObject)
 //        do {
@@ -136,97 +158,6 @@ class StorageManagerImpl: StorageManager {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class CoreDataAdapter {
-    static var context: NSManagedObjectContext? {
-       let context = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer.viewContext
-       return context
-   }
-    
-    //    MARK: - For Storage
-    func getMembers(teamNew: TeamUI) -> [Member] {
-        var members = [Member]()
-        teamNew.members.forEach {
-            let member = self.createMember(teamName: teamNew.name, member: $0, isBoss: $0.name == teamNew.boss.name)
-            guard let member = member else { return }
-            members.append(member)
-        }
-        return members
-    }
-    
-    func createMember(teamName: String, member: MemberUI, isBoss: Bool) -> Member? {
-        if let context = CoreDataAdapter.context {
-            let newMember = Member(context: context)
-            newMember.name = member.name
-            newMember.quote = member.quote
-            newMember.teamName = teamName
-            newMember.image = member.img
-            newMember.weapons = member.weapons?.joined(separator: ",")
-            newMember.isBoss = isBoss
-            return newMember
-        }
-        return nil
-    }
-    
-    
-    
-//    MARK: - For UI
-    func toMemberUI(members: NSOrderedSet?) -> [Member]? {
-//        For convert NSOrderedSet use .array as? YourType
-        let members = members?.array as? [Member]
-        return members
-    }
-    func convertMembersToMembersUI(members: [Member]?) -> [MemberUI]? {
-        guard let members = members else { return nil }
-        var membersUI = [MemberUI]()
-        for item in members {
-            guard let member = convertMemberToMemberUI(member: item) else { return nil }
-            membersUI.append(member)
-        }
-        guard !membersUI.isEmpty else { return nil }
-        return membersUI
-    }
-    func getBoss(members: [Member]?) -> Member? {
-        guard let members = members else { return nil }
-        for item in members {
-            if item.isBoss{
-                return item
-            }
-        }
-        return nil
-    }
-    func convertMemberToMemberUI(member: Member?) -> MemberUI? {
-        guard let memberName = member?.name else { return nil }
-        let img = member?.image
-        let quote = member?.quote
-        let weapons = member?.weapons?.components(separatedBy: ",")
-        return  MemberUI(name: memberName, img: img, quote: quote, weapons: weapons)
-    }
-    
-}
-
-
 //  MARK: - For Future
 
 
@@ -253,7 +184,6 @@ class CoreDataAdapter {
             return []
         }
     }
- 
  
      func setMemberAsBoss(member: MemberUI) {
          let allMembers = getMembers()

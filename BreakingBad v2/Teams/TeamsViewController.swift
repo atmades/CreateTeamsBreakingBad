@@ -56,6 +56,8 @@ class TeamsViewController: UIViewController {
         viewModel.getTeams()
         newView.updateUI(teams: viewModel.teams)
         newView.delegate = self
+
+        
     }
 }
 
@@ -83,6 +85,15 @@ extension TeamsViewController: TeamsViewDelegate {
         let vc = TeamViewController(viewModel: viewModelVC)
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func deleteTeam(index: Int, indexPath: IndexPath) {
+        print("стукнули во viewController")
+        viewModel.deleteTeamByName(index: index) {
+//            self.newView.deleteRow(index: index, indexPath: indexPath)
+            self.newView.updateUI(teams: self.viewModel.teams)
+        }
+
     }
 }
 

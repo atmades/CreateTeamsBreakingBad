@@ -27,6 +27,16 @@ class AdapterCoreData: AdapterStore {
         storageManager.updateTeam(oldName: oldName, newMembers: members, newName: teamNew.name)
     }
     
+    func deleteTeamByName(name: String, complition: @escaping()->()) {
+        storageManager.deleteTeamByName(name: name) {
+            complition()
+        }
+    }
+    
+    func deleteAll() {
+        storageManager.deleteAll()
+    }
+    
     private func getMembersFromTeamUI(teamNew: TeamUI) -> [Member] {
         var members = [Member]()
         teamNew.members.forEach {

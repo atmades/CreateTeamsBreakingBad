@@ -12,6 +12,7 @@ protocol CoreDataStackProto {
 //    var context: NSManagedObjectContext  { get }
     func saveContext()
     var persistentContainer: NSPersistentContainer { get }
+    func deleteAll()
 }
 
 class CoreDataStack: CoreDataStackProto {
@@ -24,6 +25,40 @@ class CoreDataStack: CoreDataStackProto {
         })
         return container
     }()
+    
+    func deleteAll() {
+        
+        lazy var storeContainer = persistentContainer.persistentStoreCoordinator
+        
+        // Delete each existing persistent store
+        for store in storeContainer.persistentStores {
+            do {
+                try storeContainer.destroyPersistentStore(
+                    at: store.url!,
+                    ofType: store.type,
+                    options: nil
+                )
+            } catch {
+                
+            }
+ 
+        }
+        
+        // Re-create the persistent container
+        persistentContainer = NSPersistentContainer(
+            name: "BreakingBadModel" // the name of
+            // a .xcdatamodeld file
+        )
+        
+        // Calling loadPersistentStores will re-create the
+        // persistent stores
+        persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+    }
+
     
 //    var context: NSManagedObjectContext {
 //        return persistentContainer.viewContext
