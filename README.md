@@ -4,7 +4,7 @@
 ## 🔥 Description
 :white_check_mark: Create / Edit / Delete teams
 
-:white_check_mark: Add / Edit Members of Team
+:white_check_mark: Add / Edit / Delete Members of Team
 
 :white_check_mark: Display a list of teams
 
@@ -35,7 +35,6 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 
 ## :hourglass_flowing_sand: In Progress
 
-- Remove Member
 - Search Team
 - Refactoring for remove team with animation
 - Refactoring ViewModels Member and Team
