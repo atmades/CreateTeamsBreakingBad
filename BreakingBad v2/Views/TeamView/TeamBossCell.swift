@@ -87,6 +87,7 @@ class TeamBossCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .black
+        isUserInteractionEnabled = false
         setupLayout()
         bossPhotoImageView.image = nil
     }
