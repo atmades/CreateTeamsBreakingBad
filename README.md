@@ -2,7 +2,7 @@
 
 
 ## 🔥 Description
-:white_check_mark: Create / Edit / Delete teams
+:white_check_mark: Create / Edit / Delete Teams
 
 :white_check_mark: Add / Edit / Delete Members of Team
 
