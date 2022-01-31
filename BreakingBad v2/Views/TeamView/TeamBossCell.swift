@@ -72,6 +72,7 @@ class TeamBossCell: UITableViewCell {
         else {
             bossNamelabel.text = "There is no boss"
             bossNamelabel.textColor = .lightGray
+            bossPhotoImageView.image = nil
             return
         }
         bossNamelabel.text = boss.name
@@ -87,6 +88,7 @@ class TeamBossCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .black
         setupLayout()
+        bossPhotoImageView.image = nil
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

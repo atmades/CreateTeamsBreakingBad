@@ -63,6 +63,7 @@ class TeamsViewModelImpl: TeamsViewModel {
         }
     }
     func deleteAll() {
+        print("вошли в deleteAll VIEWMODEL")
         storeAdapter.deleteAll()
     }
     

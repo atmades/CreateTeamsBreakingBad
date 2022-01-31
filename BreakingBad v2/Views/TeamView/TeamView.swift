@@ -13,6 +13,8 @@ protocol TeamViewDelegate: AnyObject {
     func getAllMembers(members: [MemberUI])
     func getBoss(boss: MemberUI?)
     func didTapMember(member: MemberUI, index: Int)
+    
+//    func deleteMember(index: indexPath.row, indexPath: indexPath)
 }
 
 class TeamView: UIView {
@@ -29,7 +31,7 @@ class TeamView: UIView {
     private var boss: MemberUI?
     private var nameTeam: String?
     
-    //    MARK: - public func
+    //    MARK: - Public Func
     public func nameValidation(isError: Bool, nameTeam: String?) {
         self.errorName = isError
         self.nameTeam = nameTeam
@@ -47,6 +49,15 @@ class TeamView: UIView {
     
     public func setBoss(boss: MemberUI?) {
         self.boss = boss
+    }
+    
+    //    MARK: - Private Func
+    private func deleteMember(row: Int) {
+        let index = row - 2
+        if members[index].name == boss?.name {
+            boss = nil
+        }
+        members.remove(at: index)
     }
     
     //    MARK: - UI Elements
@@ -112,9 +123,24 @@ extension TeamView: UITableViewDataSource {
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        let index = indexPath.row - 2
+        
+//        If is Boss, delete him and reload boss cell 
+        if members[index].name == boss?.name {
+            boss = nil
+            delegate?.getBoss(boss: boss)
+        }
+        members.remove(at: index)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.reloadData()
+    }
 }
 
-//    MARK: - extension UITableViewDataSource
+//    MARK: - extension UITableViewDelegate
 extension TeamView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row - 2
@@ -142,10 +168,10 @@ extension TeamView: MemberCellDelegate {
     func setBoss(index: Int) {
         let boss = members[index]
         delegate?.getBoss(boss: boss)
-
+        
         self.boss = boss
         let index = IndexPath(row: 0, section: 0)
         tableView.reloadRows(at: [index], with: .automatic)
-        
+        tableView.reloadData()
     }  
 }

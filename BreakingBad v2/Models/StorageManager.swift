@@ -15,6 +15,7 @@ protocol StorageManager {
     func getMember(complition: @escaping(Member)->())
     func deleteTeamByName(name: String, complition: @escaping()->())
     func deleteAll()
+    func getMemberByName(teameName: String, memberName: String, complition: @escaping()->())
 }
 
 class StorageManagerImpl: StorageManager {
@@ -101,6 +102,26 @@ class StorageManagerImpl: StorageManager {
         guard let context = context else { return }
         let newMember = Member(context: context)
         complition(newMember)
+    }
+    
+    func getMemberByName(teameName: String, memberName: String, complition: @escaping()->()) {
+        guard let context = context else { return }
+        getTeamByName(name: teameName) { team in
+            guard let team = team else { return }
+            
+//           let member = team.member?.array.map() {($0 as? Member)?.name == memberName}
+            let members = team.member?.array as? [Member]
+            guard let members = members else { return }
+            for member in members {
+                if member.name == memberName {
+                    print("нашли мебмера с именем \(member.name)")
+                    context.delete(member)
+                    print("удалили и будем сохранять \(member.name)")
+                    self.saveContext()
+                    complition()
+                }
+            }
+        }
     }
     
     //    MARK: - delete Team

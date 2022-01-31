@@ -12,6 +12,7 @@ protocol AdapterStore {
     func updateTeam(oldName: String, teamNew: TeamUI)
     func addTeam(team: TeamUI)
     func deleteTeamByName(name: String, complition: @escaping()->())
+    func getMemberByName(teameName: String, memberName: String, complition: @escaping()->())
     
     func toMemberUI(members: NSOrderedSet?) -> [Member]?
     func getBoss(members: [Member]?) -> Member?

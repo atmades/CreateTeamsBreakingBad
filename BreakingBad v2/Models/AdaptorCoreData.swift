@@ -62,6 +62,11 @@ class AdapterCoreData: AdapterStore {
         }
         return members
     }
+    func getMemberByName(teameName: String, memberName: String, complition: @escaping()->()) {
+        storageManager.getMemberByName(teameName: teameName, memberName: memberName) {
+            complition()
+        }
+    }
     
     private func convertMemberUItoMember(teamName: String, member: MemberUI, isBoss: Bool, compl: @escaping(Member)->()) {
         storageManager.getMember() { newMember in

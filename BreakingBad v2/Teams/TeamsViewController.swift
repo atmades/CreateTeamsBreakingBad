@@ -56,6 +56,7 @@ class TeamsViewController: UIViewController {
         viewModel.getTeams()
         newView.updateUI(teams: viewModel.teams)
         newView.delegate = self
+
     }
 }
 
