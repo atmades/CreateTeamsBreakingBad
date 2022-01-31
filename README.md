@@ -37,7 +37,6 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 
 - Search Team
 - Refactoring for remove team with animation
-- Refactoring ViewModels Member and Team
 
 
 ## :kick_scooter: Was used
