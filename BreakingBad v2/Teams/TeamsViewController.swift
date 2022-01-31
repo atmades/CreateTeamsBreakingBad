@@ -77,7 +77,6 @@ extension TeamsViewController:  TeamViewControllerDelegate {
 //    MARK: - extension TeamsViewDelegate
 extension TeamsViewController: TeamsViewDelegate {
     func didTapTeam(team: TeamUI, index: Int) {
-        print("didTapTeam controller")
         let viewModelVC = TeamViewModelImpl(teamsNames: viewModel.teamsNames, team: team, index: index, nameTeam: team.name)
         let vc = TeamViewController(viewModel: viewModelVC)
         vc.delegate = self
@@ -85,9 +84,7 @@ extension TeamsViewController: TeamsViewDelegate {
     }
     
     func deleteTeam(index: Int, indexPath: IndexPath) {
-        print("стукнули во viewController")
         viewModel.deleteTeamByName(index: index) {
-//            self.newView.deleteRow(index: index, indexPath: indexPath)
             self.newView.updateUI(teams: self.viewModel.teams)
         }
     }

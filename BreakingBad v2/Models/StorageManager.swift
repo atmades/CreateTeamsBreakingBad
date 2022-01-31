@@ -59,7 +59,6 @@ class StorageManagerImpl: StorageManager {
         let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
         do {
             let teams =  try context.fetch(fetchRequest)
-//            print("В сторадж тимов всего \(teams.count)")
             complition(teams)
         } catch let error as NSError {
             print(error.localizedDescription)
@@ -79,22 +78,35 @@ class StorageManagerImpl: StorageManager {
             print(error)
         }
     }
+    private func getTeamByName(name: String) -> Team? {
+        guard let context = context else { return  nil }
+        let predicate = NSPredicate(format: "teamName == %@", name)
+        let fetchTeam = NSFetchRequest<Team>(entityName: "Team")
+        fetchTeam.predicate = predicate
+        fetchTeam.returnsObjectsAsFaults = false
+        do {
+            let teamResults = try context.fetch(fetchTeam)
+            return teamResults.first
+
+        } catch {
+            print(error)
+            return nil
+        }
+    }
     
     //    MARK: - update Team
     func updateTeam(oldName: String, newMembers: [Member], newName: String) {
-        guard let context = context else { return }
-        getTeamByName(name: oldName) { teamOld in
-            let newTeam = Team(context: context)
-            newTeam.teamName = newName
-            let membersTemp = newTeam.member?.mutableCopy() as? NSMutableOrderedSet
-            for item in newMembers {
-                membersTemp?.add(item)
-            }
-            newTeam.member = membersTemp
-            teamOld?.teamName = newTeam.teamName
-            teamOld?.member = newTeam.member
-            self.saveContext()
+        guard var teamOld = getTeamByName(name: oldName) else { return }
+        let teamtemp = teamOld
+        teamtemp.teamName = newName
+        var membersTemp: NSMutableOrderedSet? = []
+        
+        for item in newMembers {
+            membersTemp?.add(item)
         }
+        teamtemp.member = membersTemp
+        teamOld = teamtemp
+        self.saveContext()
     }
     
     //    MARK: - get Member
@@ -109,14 +121,11 @@ class StorageManagerImpl: StorageManager {
         getTeamByName(name: teameName) { team in
             guard let team = team else { return }
             
-//           let member = team.member?.array.map() {($0 as? Member)?.name == memberName}
             let members = team.member?.array as? [Member]
             guard let members = members else { return }
             for member in members {
                 if member.name == memberName {
-                    print("нашли мебмера с именем \(member.name)")
                     context.delete(member)
-                    print("удалили и будем сохранять \(member.name)")
                     self.saveContext()
                     complition()
                 }
@@ -131,7 +140,6 @@ class StorageManagerImpl: StorageManager {
             guard let team = team else { return }
             context.delete(team)
             do {
-                print("сча будет трай сейв контекст")
                 try context.save()
                 complition()
             } catch let error as NSError {

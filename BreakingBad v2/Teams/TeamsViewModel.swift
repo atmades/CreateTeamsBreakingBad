@@ -28,7 +28,6 @@ class TeamsViewModelImpl: TeamsViewModel {
     
     func getTeams() {
         storeAdapter.getTeams() { teamsUI in
-//            print("в viewModel получили \(teamsUI.count)")
             self.teams = teamsUI
             for team in self.teams {
                 self.teamsNames.insert(team.name)

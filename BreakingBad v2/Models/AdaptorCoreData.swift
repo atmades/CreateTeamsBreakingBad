@@ -17,7 +17,6 @@ class AdapterCoreData: AdapterStore {
         storageManager.getTeams { teams in
             var teamsUI = [TeamUI]()
             print("в viewModel получили \(teams.count)")
-            print(teams)
             for item in teams {
                 let teamName = item.teamName
                 let members = self.toMemberUI(members: item.member)
