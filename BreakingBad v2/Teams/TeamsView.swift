@@ -102,7 +102,8 @@ extension TeamsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamCell.reuseId) as? TeamCell else { return UITableViewCell() }
         let team = teams[indexPath.row]
-        cell.setupUI(teamName: team.name)
+//        cell.setupUI(teamName: team.name)
+        cell.setupUI(team: team)
         return cell
     }
     

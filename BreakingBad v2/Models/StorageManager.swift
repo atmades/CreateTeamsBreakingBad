@@ -59,7 +59,7 @@ class StorageManagerImpl: StorageManager {
         let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
         do {
             let teams =  try context.fetch(fetchRequest)
-            print("В сторадж тимов всего \(teams.count)")
+//            print("В сторадж тимов всего \(teams.count)")
             complition(teams)
         } catch let error as NSError {
             print(error.localizedDescription)

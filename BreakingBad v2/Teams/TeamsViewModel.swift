@@ -28,7 +28,7 @@ class TeamsViewModelImpl: TeamsViewModel {
     
     func getTeams() {
         storeAdapter.getTeams() { teamsUI in
-            print("в viewModel получили \(teamsUI.count)")
+//            print("в viewModel получили \(teamsUI.count)")
             self.teams = teamsUI
             for team in self.teams {
                 self.teamsNames.insert(team.name)
@@ -54,7 +54,6 @@ class TeamsViewModelImpl: TeamsViewModel {
         teamsNames.remove(teamName)
     }
     func deleteTeamByName(index: Int, complition: @escaping()->()) {
-        print("вошли в deleteTeamByName VIEWMODEL")
         let teamName = teams[index].name
         self.teams.remove(at: index)
         self.teamsNames.remove(teamName)
@@ -63,7 +62,6 @@ class TeamsViewModelImpl: TeamsViewModel {
         }
     }
     func deleteAll() {
-        print("вошли в deleteAll VIEWMODEL")
         storeAdapter.deleteAll()
     }
     
