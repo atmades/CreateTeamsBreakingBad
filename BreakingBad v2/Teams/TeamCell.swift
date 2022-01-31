@@ -13,6 +13,7 @@ import SDWebImage
 class TeamCell: UITableViewCell {
     
     static let reuseId = "TeamCell"
+    let imageSize = 48
     
     //    MARK: - UI Elements
     private var containerView: UIView = {
