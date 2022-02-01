@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-
 class TeamCell: UITableViewCell {
     
     static let reuseId = "TeamCell"
