@@ -141,7 +141,7 @@ class MemberCell: UITableViewCell {
         weaponslabel.snp.makeConstraints { make in
             make.left.equalTo(avatarImageView.snp.right).offset(16)
             make.right.equalTo(chevronRightImageView.snp.left).offset(0)
-            make.top.equalTo(quotelabel.snp.bottom).offset(16)
+            make.top.greaterThanOrEqualTo(quotelabel.snp.bottom).offset(16)
             make.bottom.equalToSuperview().offset(-16)
         }
     }
