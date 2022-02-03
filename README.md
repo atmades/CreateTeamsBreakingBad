@@ -60,12 +60,20 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 ## 📱 Work example illustration:
 
 ### Create Team
-![CreateTeam](https://user-images.githubusercontent.com/31052641/147358139-402ffb9b-3cc4-4bf2-a8e7-b24a03d5d881.gif)
+![CreateTeam](https://user-images.githubusercontent.com/31052641/152349256-6a96927c-cbf9-45cc-b8d7-1ace8e11dbad.gif)
 
-### Edit Member
+
+### Validations
+![CheckFields](https://user-images.githubusercontent.com/31052641/152349364-2d631e3b-f061-49fb-90cb-f68c133f11d4.gif)
+
+
+### Remove Team and Member
+![RemoveTeamAndMembers](https://user-images.githubusercontent.com/31052641/152349518-bf5ad178-6891-4da0-85ad-11314fd48643.gif)
+
+
+### Teams search
 ![EditMember](https://user-images.githubusercontent.com/31052641/147358170-795f0fc4-2b45-4a4d-b3c0-2f4f89a0fe5a.gif)
 
-### Team Validation
-![TeamValidation](https://user-images.githubusercontent.com/31052641/147358184-0c5c0408-7de5-4b4a-ab7a-4bd2edf6df16.gif)
+
 
 
