@@ -22,12 +22,6 @@ class MemberInfoCell: UITableViewCell {
     weak var delegate: MemberInfoCellDelegate?
     var quoteText = ""
     
-//    //    MARK: - For Loader
-//    let growColor = UIColor.red
-//    let circleFrame = CGRect(x: .zero, y: .zero, width: 200, height: 200)
-//    let circleColor = UIColor(red: 77 / 255.0, green: 182 / 255.0, blue: 255 / 255.0, alpha: 1.0)
-//    lazy var circleLoader = LiquidLoader(frame: circleFrame, effect: .GrowCircle(circleColor))
-    
 //    MARK: - UI Elements
     private var avatarImageView: UIImageView = {
         let imageView = UIImageView()
