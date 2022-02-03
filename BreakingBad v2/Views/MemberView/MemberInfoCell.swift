@@ -17,9 +17,16 @@ protocol MemberInfoCellDelegate: AnyObject {
 }
 
 class MemberInfoCell: UITableViewCell {
+    //    MARK: - Properties
     static let reuseId = "NewMemberCell"
     weak var delegate: MemberInfoCellDelegate?
     var quoteText = ""
+    
+//    //    MARK: - For Loader
+//    let growColor = UIColor.red
+//    let circleFrame = CGRect(x: .zero, y: .zero, width: 200, height: 200)
+//    let circleColor = UIColor(red: 77 / 255.0, green: 182 / 255.0, blue: 255 / 255.0, alpha: 1.0)
+//    lazy var circleLoader = LiquidLoader(frame: circleFrame, effect: .GrowCircle(circleColor))
     
 //    MARK: - UI Elements
     private var avatarImageView: UIImageView = {
@@ -30,6 +37,14 @@ class MemberInfoCell: UITableViewCell {
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+
+    private var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.style = .large
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+//        indicator.turnOff()
+        return indicator
     }()
     private var uploadButton: UIButton = {
         let button = UIButton()
@@ -45,6 +60,7 @@ class MemberInfoCell: UITableViewCell {
     }()
     @objc
     private func didTapUpload() {
+        
         delegate?.didTapUpload()
     }
     lazy private var nameTextField: UITextField = {
@@ -92,7 +108,6 @@ class MemberInfoCell: UITableViewCell {
     }()
     lazy private var setRandomButton: UIButton = {
         let button = MainButton()
-//        button.backgroundColor = UIColor(named: String.color.green.rawValue)
         button.layer.cornerRadius = 2
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
@@ -103,6 +118,8 @@ class MemberInfoCell: UITableViewCell {
     }()
     @objc
     private func didTapRandom() {
+        setRandomButton.setTitle("Wait please ...", for: .normal)
+        activityIndicator.turnOn()
         delegate?.getRandomData()
     }
     
@@ -123,6 +140,12 @@ class MemberInfoCell: UITableViewCell {
             make.width.height.equalTo(190)
             make.centerX.equalTo(self)
             make.top.equalToSuperview().offset(16)
+        }
+        contentView.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.width.height.equalTo(40)
+            make.centerY.equalTo(avatarImageView)
+            make.centerX.equalTo(avatarImageView)
         }
         contentView.addSubview(uploadButton)
         uploadButton.snp.makeConstraints { make in
@@ -169,10 +192,13 @@ class MemberInfoCell: UITableViewCell {
     
     //    MARK: - Public Func
     public func setupNameAndAvatar(name: String?, imageUrl: String?){
+        setRandomButton.setTitle("Set random", for: .normal)
+        
         self.nameTextField.text = name
         guard let imageUrl = imageUrl else { return }
         guard let url = URL(string: imageUrl) else { return }
         avatarImageView.sd_setImage(with: url, completed: nil)
+        activityIndicator.turnOff()
     }
     public func setupQuote(quote: String){
         if quote == String.placeHolders.quote.rawValue {

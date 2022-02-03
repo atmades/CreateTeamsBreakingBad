@@ -7,14 +7,11 @@
 
 import UIKit
 
-
 class MainButton: UIButton {
-
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
     }
-
     private lazy var gradientLayer: CAGradientLayer = {
         let l = CAGradientLayer()
         l.frame = self.bounds

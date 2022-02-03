@@ -27,10 +27,6 @@ struct Quote: Decodable {
 }
 
 // MARK: - FOR UI
-//struct Game {
-//    var name: String?
-//    var teams: [Team]?
-//}
 struct TeamUI {
     var name: String
     var members: [MemberUI]

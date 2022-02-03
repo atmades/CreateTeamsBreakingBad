@@ -16,7 +16,7 @@ class AdapterCoreData: AdapterStore {
     func getTeams(complition: @escaping([TeamUI])->()) {
         storageManager.getTeams { teams in
             var teamsUI = [TeamUI]()
-            print("в viewModel получили \(teams.count)")
+            print("viewModel got teams \(teams.count)")
             for item in teams {
                 let teamName = item.teamName
                 let members = self.toMemberUI(members: item.member)
@@ -29,7 +29,7 @@ class AdapterCoreData: AdapterStore {
                     teamsUI.append(team)
                 }
             }
-            print("в AdapterCoreData преобразовали \(teamsUI.count)")
+            print("AdapterCoreData converted teams\(teamsUI.count)")
             complition(teamsUI)
         }
     }
@@ -52,6 +52,12 @@ class AdapterCoreData: AdapterStore {
         storageManager.deleteAll()
     }
     
+    func getMemberByName(teameName: String, memberName: String, complition: @escaping()->()) {
+        storageManager.getMemberByName(teameName: teameName, memberName: memberName) {
+            complition()
+        }
+    }
+    //    MARK: - Private func
     private func getMembersFromTeamUI(teamNew: TeamUI) -> [Member] {
         var members = [Member]()
         teamNew.members.forEach {
@@ -60,11 +66,6 @@ class AdapterCoreData: AdapterStore {
             }
         }
         return members
-    }
-    func getMemberByName(teameName: String, memberName: String, complition: @escaping()->()) {
-        storageManager.getMemberByName(teameName: teameName, memberName: memberName) {
-            complition()
-        }
     }
     
     private func convertMemberUItoMember(teamName: String, member: MemberUI, isBoss: Bool, compl: @escaping(Member)->()) {

@@ -18,10 +18,14 @@ extension String {
         case blue = "blue"
         case green = "green"
         case yellow = "yellow"
-  
     }
     enum icons: String {
         case chevronRight = "chevronRight"
+        case add = "add"
+    }
+    enum images: String {
+        case shadow = "shadow"
+        case logo = "logo"
     }
     enum placeHolders: String {
         case quote = "Please enter a quote"

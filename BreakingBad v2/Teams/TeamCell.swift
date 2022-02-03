@@ -26,7 +26,7 @@ class TeamCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
-        let image = UIImage(named: "shadow")
+        let image = UIImage(named: String.images.shadow.rawValue)
         imageView.image = image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

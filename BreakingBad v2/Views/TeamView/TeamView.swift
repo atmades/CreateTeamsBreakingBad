@@ -50,6 +50,9 @@ class TeamView: UIView {
     public func setBoss(boss: MemberUI?) {
         self.boss = boss
     }
+    func onLoader(isOn: Bool) {
+        
+    }
     
     //    MARK: - Private Func
     private func deleteMember(row: Int) {

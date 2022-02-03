@@ -28,7 +28,6 @@ extension UIViewController {
     private func keyboardWillShow(notification: Notification) {
         self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
-    
     @objc
     private func keyboardWillHide(notification: Notification) {
         self.navigationItem.rightBarButtonItem?.isEnabled = true
@@ -51,7 +50,6 @@ extension UIViewController {
             navigationController?.navigationBar.isTranslucent = false
             navigationController?.navigationBar.tintColor = tintColor
             navigationItem.title = title
-            
         } else {
             // Fallback on earlier versions
             navigationController?.navigationBar.barTintColor = backgoundColor

@@ -38,6 +38,12 @@ class MemberCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    private var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.turnOff()
+        return indicator
+    }()
     private var namelabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
@@ -118,6 +124,12 @@ class MemberCell: UITableViewCell {
             make.top.equalToSuperview().offset(16)
             make.bottom.lessThanOrEqualToSuperview().offset(-16)
         }
+        containerView.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.width.height.equalTo(40)
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
         containerView.addSubview(namelabel)
         namelabel.snp.makeConstraints { make in
             make.left.equalTo(avatarImageView.snp.right).offset(16)
@@ -148,6 +160,7 @@ class MemberCell: UITableViewCell {
     
     // MARK: - public func
     public func setupCell(name: String, quote: String?, img: String?, weapons: [String]?, index: Int) {
+        activityIndicator.turnOn()
         namelabel.text = name
         self.index = index
         quote == nil ? (quotelabel.text = "No quote") : (quotelabel.text = quote)
@@ -155,6 +168,7 @@ class MemberCell: UITableViewCell {
         if let imgUrl = img {
             guard let url = URL(string: imgUrl) else { return }
             avatarImageView.sd_setImage(with: url, completed: nil)
+            activityIndicator.turnOff()
         }
         if let weapons = weapons {
             let textWeapon = weapons.joined(separator: ", ")
@@ -164,6 +178,10 @@ class MemberCell: UITableViewCell {
             weaponslabel.text = "No weapons"
             setupWeaponLabelStyle(isEmpty: true)
         }
+    }
+    
+    func onLoader(isOn: Bool) {
+        isOn ? activityIndicator.turnOn() : activityIndicator.turnOff()
     }
     
     // MARK: - Init

@@ -32,9 +32,9 @@ class TeamsViewController: UIViewController {
         navigationItem.title = "Teams"
         navigationItem.searchController = searсhController
         navigationItem.hidesSearchBarWhenScrolling = false
-        
-        let createNewTeam = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(didTapAdd))
-        navigationItem.rightBarButtonItems = [createNewTeam]
+        let addImage = UIImage(named: String.icons.add.rawValue)
+        let addButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(didTapAdd))
+        navigationItem.rightBarButtonItems = [addButton]
     }
     @objc
     private func didTapAdd() {

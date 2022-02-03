@@ -8,7 +8,6 @@
 import UIKit
 
 extension UITextField {
-    
     //    MARK: - Add Done Button to Keyboard
     func setupDoneButton() {
         let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.frame.size.width, height: 30))
