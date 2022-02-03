@@ -2,7 +2,7 @@
 
 
 ## 🔥 Description
-:white_check_mark: Create / Edit / Delete Teams
+:white_check_mark: Create / Edit / Delete / Search Teams
 
 :white_check_mark: Add / Edit / Delete Members of Team
 
@@ -35,7 +35,7 @@ The ability to fill in the fields randomly using the API https://www.breakingbad
 
 ## :hourglass_flowing_sand: In Progress
 
-- Search Team
+- Upload image for avatar from a phone
 - Refactoring for remove team with animation
 
 
