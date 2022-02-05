@@ -11,6 +11,13 @@ class MainButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
+        
+        if isEnabled {
+            gradientLayer.isHidden = false
+        } else {
+            gradientLayer.isHidden = true
+            backgroundColor = .lightGray
+        }
     }
     private lazy var gradientLayer: CAGradientLayer = {
         let l = CAGradientLayer()

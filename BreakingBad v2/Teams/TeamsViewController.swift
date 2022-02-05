@@ -22,8 +22,6 @@ class TeamsViewController: UIViewController {
         let searсhController = UISearchController(searchResultsController: nil)
         searсhController.searchBar.barStyle = .black
         searсhController.searchBar.searchBarStyle = .default
-        
-        //        var textFieldInsideSearchBar = searсhController.value"forKey: searchField") as? UITextField
         return searсhController
     } ()
     

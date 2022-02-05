@@ -65,7 +65,6 @@ class MemberViewController: UIViewController {
 //    MARK: - extension NewMemberDelegate
 extension MemberViewController: MemberViewDelegate {
     func uploadImage() {
-        ////         Waiting for CoreData
     }
     func getWeapons(weapons: [String]?) {
         viewModel.setSelectedWeapons(weapons: weapons)

@@ -36,6 +36,7 @@ class MemberInfoCell: UITableViewCell {
     private var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.style = .large
+        indicator.color = .green
         indicator.translatesAutoresizingMaskIntoConstraints = false
 //        indicator.turnOff()
         return indicator
@@ -106,13 +107,14 @@ class MemberInfoCell: UITableViewCell {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         button.setTitle("Set random", for: .normal)
+        button.setTitle("Wait please ...", for: .disabled)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapRandom), for: .touchUpInside)
         return button
     }()
     @objc
     private func didTapRandom() {
-        setRandomButton.setTitle("Wait please ...", for: .normal)
+        setRandomButton.isEnabled = false
         activityIndicator.turnOn()
         delegate?.getRandomData()
     }
@@ -186,8 +188,7 @@ class MemberInfoCell: UITableViewCell {
     
     //    MARK: - Public Func
     public func setupNameAndAvatar(name: String?, imageUrl: String?){
-        setRandomButton.setTitle("Set random", for: .normal)
-        
+        setRandomButton.isEnabled = true
         self.nameTextField.text = name
         guard let imageUrl = imageUrl else { return }
         guard let url = URL(string: imageUrl) else { return }

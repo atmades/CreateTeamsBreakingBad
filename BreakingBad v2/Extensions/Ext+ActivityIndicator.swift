@@ -10,12 +10,10 @@ import UIKit
 
 extension UIActivityIndicatorView {
     public func turnOn() {
-        print("начинаем крутить")
         isHidden = false
         startAnimating()
     }
     public func turnOff() {
-        print("заканчиваем крутить")
         isHidden = true
         stopAnimating()
     }
