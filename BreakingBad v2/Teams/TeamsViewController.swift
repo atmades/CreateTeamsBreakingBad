@@ -63,7 +63,7 @@ class TeamsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         setupNavController()
-        
+//        viewModel.deleteAll()
         viewModel.getTeams()
         newView.updateUI(teams: viewModel.teams)
         newView.delegate = self

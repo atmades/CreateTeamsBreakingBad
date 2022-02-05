@@ -19,7 +19,7 @@ protocol NewTeamViewModel {
     //  func
     func setName(name: String)
     func updateMembers(members: [MemberUI])
-    func updateMember(member: MemberUI, index: Int, oldName: String)
+    func updateMember(member: MemberUI, index: Int, oldName: String, isBoss: Bool)
     func setBoss(boss: MemberUI?)
     func addMember(membber: MemberUI)
     func setMembersNames(members: [MemberUI])
@@ -51,10 +51,12 @@ class NewTeamViewModelImpl: NewTeamViewModel {
     func setMembersNames(members: [MemberUI]) {
         members.forEach { membersNames.insert($0.name) }
     }
-    func updateMember(member: MemberUI, index: Int, oldName: String) {
+    func updateMember(member: MemberUI, index: Int, oldName: String, isBoss: Bool) {
         members[index] = member
         membersNames.remove(oldName)
         membersNames.insert(member.name)
+        
+        isBoss == true ? setBoss(boss: member) : ()
     }
     func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:TeamUI?) -> ()) {
         var name: String

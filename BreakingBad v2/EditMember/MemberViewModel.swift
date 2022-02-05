@@ -18,6 +18,7 @@ protocol MemberViewModel {
     
     var oldName: String { get }
     var index: Int { get }
+    var isBoss: Bool { get }
     
     //  func
     func setName(name: String)
@@ -41,6 +42,7 @@ class MemberViewModelImpl: MemberViewModel {
     var membersNames = Set<String>()
     var oldName: String
     var index: Int
+    var isBoss: Bool
     
     //  Func
     func setSelectedWeapons(weapons: [String]?) {
@@ -97,7 +99,7 @@ class MemberViewModelImpl: MemberViewModel {
     }
     
     //    MARK: - Init
-    init(membersNames: Set<String>, member: MemberUI, index: Int) {
+    init(membersNames: Set<String>, member: MemberUI, index: Int, isBoss: Bool) {
         self.membersNames = membersNames
         self.currentName = member.name
         self.quote = member.quote
@@ -105,6 +107,7 @@ class MemberViewModelImpl: MemberViewModel {
         self.selectedWeapons = member.weapons
         self.oldName = member.name
         self.index = index
+        self.isBoss = isBoss
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MemberVCDelegate: AnyObject {
-    func getMember(member: MemberUI, oldName: String, index: Int)
+    func getMember(member: MemberUI, oldName: String, index: Int, isBoss: Bool)
 }
 
 class MemberViewController: UIViewController {
@@ -28,7 +28,7 @@ class MemberViewController: UIViewController {
     private func didTapSaveMember() {
         viewModel.checkMember() {(error, result) in
             if let member = result {
-                self.delegate?.getMember(member: member, oldName: self.viewModel.oldName, index: self.viewModel.index )
+                self.delegate?.getMember(member: member, oldName: self.viewModel.oldName, index: self.viewModel.index, isBoss: self.viewModel.isBoss )
                 self.navigationController?.popViewController(animated: true)
             } else if let error = error {
                 self.newView.nameValidation(isError: true, name: self.viewModel.currentName)

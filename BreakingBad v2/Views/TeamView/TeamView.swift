@@ -12,7 +12,7 @@ protocol TeamViewDelegate: AnyObject {
     func nameDidEndEditing(text: String)
     func getAllMembers(members: [MemberUI])
     func getBoss(boss: MemberUI?)
-    func didTapMember(member: MemberUI, index: Int)
+    func didTapMember(member: MemberUI, index: Int, isBoss: Bool)
     
 //    func deleteMember(index: indexPath.row, indexPath: indexPath)
 }
@@ -148,7 +148,8 @@ extension TeamView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row - 2
         let member = members[index]
-        delegate?.didTapMember(member: member, index: index)
+        let isBoss = member.name == boss?.name ? true : false
+        delegate?.didTapMember(member: member, index: index, isBoss: isBoss)
     }
 }
 
@@ -166,7 +167,8 @@ extension TeamView: TeamInfoCellDelegate {
 extension TeamView: MemberCellDelegate {
     func goToDetail(index: Int) {
         let member = members[index]
-        delegate?.didTapMember(member: member, index: index)
+        let isBoss = member.name == boss?.name ? true : false
+        delegate?.didTapMember(member: member, index: index, isBoss: isBoss)
     }
     func setBoss(index: Int) {
         let boss = members[index]

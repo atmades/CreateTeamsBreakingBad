@@ -54,6 +54,7 @@ class NewTeamViewController: UIViewController {
         super.viewWillAppear(animated)
         newView.updateMembers(members: viewModel.members)
         newView.setNameTeam(nameTeam: viewModel.nameTeam)
+        newView.setBoss(boss: viewModel.boss)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,8 +67,8 @@ class NewTeamViewController: UIViewController {
 
 //    MARK: - extension NewTeamDelegate
 extension NewTeamViewController: TeamViewDelegate {
-    func didTapMember(member: MemberUI, index: Int) {
-        let viewModelVC = MemberViewModelImpl(membersNames: viewModel.membersNames, member: member, index: index)
+    func didTapMember(member: MemberUI, index: Int, isBoss: Bool) {
+        let viewModelVC = MemberViewModelImpl(membersNames: viewModel.membersNames, member: member, index: index, isBoss: isBoss)
         let vc = MemberViewController(viewModel: viewModelVC)
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
@@ -98,8 +99,8 @@ extension NewTeamViewController: NewMemberVCDelegate {
 
 //    MARK: - extension MemberVCDelegate
 extension NewTeamViewController: MemberVCDelegate {
-    func getMember(member: MemberUI, oldName: String, index: Int) {
-        viewModel.updateMember(member: member, index: index, oldName: oldName)
+    func getMember(member: MemberUI, oldName: String, index: Int, isBoss: Bool) {
+        viewModel.updateMember(member: member, index: index, oldName: oldName, isBoss: isBoss)
         newView.updateMembers(members: viewModel.members)
     }
 }

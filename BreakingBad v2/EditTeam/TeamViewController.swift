@@ -67,8 +67,8 @@ class TeamViewController: UIViewController {
 
 //    MARK: - extension NewTeamDelegate
 extension TeamViewController: TeamViewDelegate {
-    func didTapMember(member: MemberUI, index: Int) {
-        let viewModelVC = MemberViewModelImpl(membersNames: viewModel.membersNames, member: member, index: index)
+    func didTapMember(member: MemberUI, index: Int, isBoss: Bool) {
+        let viewModelVC = MemberViewModelImpl(membersNames: viewModel.membersNames, member: member, index: index, isBoss: isBoss)
         let vc = MemberViewController(viewModel: viewModelVC)
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
@@ -99,8 +99,8 @@ extension TeamViewController: NewMemberVCDelegate {
 
 //    MARK: - extension MemberVCDelegate
 extension TeamViewController: MemberVCDelegate {
-    func getMember(member: MemberUI, oldName: String, index: Int) {
-        viewModel.updateMember(member: member, index: index, oldName: oldName)
+    func getMember(member: MemberUI, oldName: String, index: Int, isBoss: Bool) {
+        viewModel.updateMember(member: member, index: index, oldName: oldName, isBoss: isBoss)
         newView.updateMembers(members: viewModel.members)
     }
 }
