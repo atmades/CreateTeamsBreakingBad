@@ -210,7 +210,6 @@ class TeamCell: UITableViewCell {
                 members.append($0)
             }
         }
-        
         for index in (0 ... avatars.count - 1) where index <= members.count - 1 {
             if let imgUrl = members[index].img {
                 guard let url = URL(string: imgUrl) else { return }

@@ -65,13 +65,6 @@ class MemberViewViewModelImpl: MemberViewViewModel {
         } else {
             selectedWeapons.remove(weapon)
         }
-        //  Check isEmpty and delegate
         complition(selectedWeapons.isEmpty )
-//        if selectedWeapons.isEmpty {
-////            delegate?.getWeapons(weapons: nil)
-//        } else {
-//            let selectedArray = Array(selectedWeapons)
-////            delegate?.getWeapons(weapons: selectedArray)
-//        }
     }
 }
