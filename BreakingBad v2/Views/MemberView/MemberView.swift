@@ -18,6 +18,7 @@ protocol MemberViewDelegate: AnyObject {
 class MemberView: UIView {
     
     weak var delegate: MemberViewDelegate?
+    var viewModel: MemberViewViewModel = MemberViewViewModelImpl()
     
     private var name: String?
     private var imageUrl: String?
@@ -49,37 +50,27 @@ class MemberView: UIView {
     }
     
     //    MARK: - public func
-    
-    public func setupUI(name: String?,imageUrl: String?, quote: String?, selectedWeapons: [String]?) {
-        self.name = name
-        self.imageUrl = imageUrl
-        if let quote = quote {
-            self.quote = quote
-        }
-        if let selectedWeapons = selectedWeapons {
-            self.selectedWeapons = Set(selectedWeapons)
+    func setupUI(name: String?,imageUrl: String?, quote: String?, selectedWeapons: [String]?) {
+        viewModel.setupUI(name: name, imageUrl: imageUrl, quote: quote, selectedWeapons: selectedWeapons)
+    }
+    func setupRandom(name: String?, quote: String?, imageUrl: String? ) {
+        viewModel.setupRandom(name: name, quote: quote, imageUrl: imageUrl) {
+            let index = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [index], with: .automatic)
         }
     }
-    public func setupRandom(name: String?, quote: String?, imageUrl: String? ) {
-        self.name = name
-        self.imageUrl = imageUrl
-        if let quote = quote {
-            self.quote = quote
+    func nameValidation(isError: Bool, name: String?) {
+        viewModel.nameValidation(isError: isError, name: name) {
+            let index = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [index], with: .automatic)
         }
-        let index = IndexPath(row: 0, section: 0)
-        tableView.reloadRows(at: [index], with: .automatic)
     }
-    public func nameValidation(isError: Bool, name: String?) {
-        self.errorName = isError
-        self.name = name
-        let index = IndexPath(row: 0, section: 0)
-        tableView.reloadRows(at: [index], with: .automatic)
+    func setWeapons(weapons: [String]) {
+        viewModel.setWeapons(weapons: weapons) {
+            self.tableView.reloadData()
+        }
     }
-    public func setWeapons(weapons: [String]) {
-        self.weapons = weapons
-        tableView.reloadData()
-    }
-    public func setAvatar(image: UIImage) {
+    func setAvatar(image: UIImage) {
         ////         Waiting for CoreData
     }
     
@@ -97,7 +88,7 @@ class MemberView: UIView {
 //    MARK: - extension UITableViewDataSource
 extension MemberView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weapons.count + 1
+        return viewModel.weapons.count + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
@@ -105,16 +96,16 @@ extension MemberView: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberInfoCell.reuseId) as? MemberInfoCell else { return UITableViewCell() }
             
             cell.delegate = self
-            cell.setupNameAndAvatar(name: name, imageUrl: imageUrl)
-            cell.setupQuote(quote: quote)
-            cell.nameIsEmpty(isEmpty: errorName)
+            cell.setupNameAndAvatar(name: viewModel.name, imageUrl: viewModel.imageUrl)
+            cell.setupQuote(quote: viewModel.quote)
+            cell.nameIsEmpty(isEmpty: viewModel.errorName)
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: WeaponCell.reuseId) as? WeaponCell else { return UITableViewCell() }
             
             let index = indexPath.row - 1
-            cell.setupUI(weapon: weapons[index], index: index)
-            selectedWeapons.contains(weapons[index]) ? cell.setupIsSelected(isSelected: true) : cell.setupIsSelected(isSelected: false)
+            cell.setupUI(weapon: viewModel.weapons[index], index: index)
+            selectedWeapons.contains(viewModel.weapons[index]) ? cell.setupIsSelected(isSelected: true) : cell.setupIsSelected(isSelected: false)
             cell.delegate = self
             return cell
         }
@@ -140,19 +131,14 @@ extension MemberView: MemberInfoCellDelegate {
 //    MARK: - extension WeaponCellDelegate
 extension MemberView: WeaponCellDelegate {
     func didTapSelect(selected: Bool, index: Int) {
-        let weapon = weapons[index]
-        //  add/remove selected weapon
-        if selected {
-            selectedWeapons.insert(weapon)
-        } else {
-            selectedWeapons.remove(weapon)
-        }
-        //  Check isEmpty and delegate
-        if selectedWeapons.isEmpty {
-            delegate?.getWeapons(weapons: nil)
-        } else {
-            let selectedArray = Array(selectedWeapons)
-            delegate?.getWeapons(weapons: selectedArray)
+        
+        viewModel.addRemoveWeapon(index: index, isSelected: selected) { isEmpty in
+            if isEmpty {
+                self.delegate?.getWeapons(weapons: nil)
+            } else {
+                let selectedArray = Array(self.viewModel.selectedWeapons)
+                self.delegate?.getWeapons(weapons: selectedArray)
+            }
         }
     }
 }

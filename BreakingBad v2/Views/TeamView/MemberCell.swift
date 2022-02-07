@@ -180,10 +180,6 @@ class MemberCell: UITableViewCell {
         }
     }
     
-    func onLoader(isOn: Bool) {
-        isOn ? activityIndicator.turnOn() : activityIndicator.turnOff()
-    }
-    
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

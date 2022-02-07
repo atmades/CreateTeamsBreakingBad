@@ -63,6 +63,9 @@ class TeamViewController: UIViewController {
         setupNavController()
         newView.delegate = self
     }
+    deinit {
+//        print(" deinit TeamViewController")
+    }
 }
 
 //    MARK: - extension NewTeamDelegate

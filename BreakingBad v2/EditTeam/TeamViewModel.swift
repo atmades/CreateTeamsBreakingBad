@@ -64,9 +64,7 @@ class TeamViewModelImpl: TeamViewModel {
         members[index] = member
         membersNames.remove(oldName)
         membersNames.insert(member.name)
-        
         isBoss == true ? setBoss(boss: member) : ()
-        print(isBoss)
     }
     func checkTeam(complition: @escaping(_ error: AlertsName?,_ errorName: Bool, _ result:TeamUI?) -> ()) {
         var name: String

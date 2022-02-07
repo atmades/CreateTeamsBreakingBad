@@ -58,6 +58,7 @@ class TeamsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         searching ? newView.updateUI(teams: self.filteredTeams) : newView.updateUI(teams: self.viewModel.teams)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,10 +87,9 @@ extension TeamsViewController: NewTeamViewControllerDelegate {
 }
 
 //    MARK: - extension TeamViewControllerDelegate
-extension TeamsViewController:  TeamViewControllerDelegate {
+extension TeamsViewController: TeamViewControllerDelegate {
     func getTeam(team: TeamUI, index: Int, oldNameTeam: String) {
         viewModel.updateTeam(team: team, index: index, oldNameTeam: oldNameTeam)
-        newView.updateUI(teams: viewModel.teams)
     }
 }
 

@@ -32,7 +32,6 @@ class MemberInfoCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
     private var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.style = .large
@@ -55,10 +54,9 @@ class MemberInfoCell: UITableViewCell {
     }()
     @objc
     private func didTapUpload() {
-        
         delegate?.didTapUpload()
     }
-    lazy private var nameTextField: UITextField = {
+    private var nameTextField: UITextField = {
         let textField = UITextField()
         let redPlaceholderText = NSAttributedString(string: "Member Name",
                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
@@ -77,7 +75,7 @@ class MemberInfoCell: UITableViewCell {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-    lazy private var quoteTextView: UITextView = {
+    private var quoteTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = UIColor(named: String.color.gray90.rawValue)
         textView.textAlignment = .center
@@ -101,7 +99,7 @@ class MemberInfoCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    lazy private var setRandomButton: UIButton = {
+    private var setRandomButton: UIButton = {
         let button = MainButton()
         button.layer.cornerRadius = 2
         button.setTitleColor(.black, for: .normal)
@@ -187,7 +185,7 @@ class MemberInfoCell: UITableViewCell {
     }
     
     //    MARK: - Public Func
-    public func setupNameAndAvatar(name: String?, imageUrl: String?){
+    func setupNameAndAvatar(name: String?, imageUrl: String?){
         setRandomButton.isEnabled = true
         self.nameTextField.text = name
         guard let imageUrl = imageUrl else { return }
@@ -195,7 +193,7 @@ class MemberInfoCell: UITableViewCell {
         avatarImageView.sd_setImage(with: url, completed: nil)
         activityIndicator.turnOff()
     }
-    public func setupQuote(quote: String){
+    func setupQuote(quote: String){
         if quote == String.placeHolders.quote.rawValue {
             quoteTextView.textColor = .lightGray
         } else {
@@ -203,7 +201,7 @@ class MemberInfoCell: UITableViewCell {
         }
         self.quoteTextView.text = quote
     }
-   public func nameIsEmpty(isEmpty: Bool) {
+    func nameIsEmpty(isEmpty: Bool) {
        if isEmpty {
            nameTextField.layer.borderColor = UIColor.red.cgColor
        }

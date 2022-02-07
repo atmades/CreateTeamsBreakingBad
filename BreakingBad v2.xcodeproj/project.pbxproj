@@ -49,6 +49,7 @@
 		B9E73F3A2756B4DE000EDCBA /* TeamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E73F392756B4DE000EDCBA /* TeamsViewModel.swift */; };
 		B9E73F3D2756B522000EDCBA /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E73F3C2756B522000EDCBA /* Model.swift */; };
 		B9E73F412756B57E000EDCBA /* TeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E73F402756B57E000EDCBA /* TeamsView.swift */; };
+		B9FFE1B627AF0A470000433F /* MemberViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FFE1B527AF0A470000433F /* MemberViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		B9E73F392756B4DE000EDCBA /* TeamsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsViewModel.swift; sourceTree = "<group>"; };
 		B9E73F3C2756B522000EDCBA /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B9E73F402756B57E000EDCBA /* TeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsView.swift; sourceTree = "<group>"; };
+		B9FFE1B527AF0A470000433F /* MemberViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		B91755282775789800C6F434 /* MemberView */ = {
 			isa = PBXGroup;
 			children = (
+				B9FFE1B527AF0A470000433F /* MemberViewViewModel.swift */,
 				B9B18AAF275921B5005EA9A1 /* MemberView.swift */,
 				B9B18AB127593BC1005EA9A1 /* MemberInfoCell.swift */,
 				B9B18AB527594476005EA9A1 /* WeaponCell.swift */,
@@ -408,6 +411,7 @@
 				B90C65EC277B819900E4D69E /* CoreDataStack.swift in Sources */,
 				B9DE01D327610036007090DF /* NewTeamViewModel.swift in Sources */,
 				B917551C2773866600C6F434 /* TeamViewModel.swift in Sources */,
+				B9FFE1B627AF0A470000433F /* MemberViewViewModel.swift in Sources */,
 				B9B18A9E2757D217005EA9A1 /* TeamCell.swift in Sources */,
 				B9B18AB627594476005EA9A1 /* WeaponCell.swift in Sources */,
 				B901FC0B27A47A8400D23C7A /* AdaptorCoreData.swift in Sources */,

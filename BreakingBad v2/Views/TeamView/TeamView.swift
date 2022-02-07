@@ -13,8 +13,6 @@ protocol TeamViewDelegate: AnyObject {
     func getAllMembers(members: [MemberUI])
     func getBoss(boss: MemberUI?)
     func didTapMember(member: MemberUI, index: Int, isBoss: Bool)
-    
-//    func deleteMember(index: indexPath.row, indexPath: indexPath)
 }
 
 class TeamView: UIView {
@@ -49,18 +47,6 @@ class TeamView: UIView {
     
     public func setBoss(boss: MemberUI?) {
         self.boss = boss
-    }
-    func onLoader(isOn: Bool) {
-        
-    }
-    
-    //    MARK: - Private Func
-    private func deleteMember(row: Int) {
-        let index = row - 2
-        if members[index].name == boss?.name {
-            boss = nil
-        }
-        members.remove(at: index)
     }
     
     //    MARK: - UI Elements
@@ -111,7 +97,6 @@ extension TeamView: UITableViewDataSource {
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamInfoCell.reuseId) as? TeamInfoCell else { return UITableViewCell() }
-            
             cell.nameIsEmpty(isEmpty: errorName)
             cell.setNameTeam(nameTeam: nameTeam)
             cell.delegate = self
@@ -167,7 +152,7 @@ extension TeamView: TeamInfoCellDelegate {
 extension TeamView: MemberCellDelegate {
     func goToDetail(index: Int) {
         let member = members[index]
-        let isBoss = member.name == boss?.name ? true : false
+        let isBoss = member.name == boss?.name
         delegate?.didTapMember(member: member, index: index, isBoss: isBoss)
     }
     func setBoss(index: Int) {

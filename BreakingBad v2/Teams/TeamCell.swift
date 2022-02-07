@@ -82,6 +82,7 @@ class TeamCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        imageView.image = nil
         imageView.layer.cornerRadius = 18
         imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor(named: String.color.green.rawValue)?.cgColor
@@ -182,6 +183,9 @@ class TeamCell: UITableViewCell {
     }
     
     func setupUI(team: TeamUI) {
+        avatarImageView1.isHidden = true
+        avatarImageView2.isHidden = true
+        avatarImageView3.isHidden = true
         
         //  Set labels texts
         teamNamelabel.text = team.name
@@ -200,14 +204,13 @@ class TeamCell: UITableViewCell {
         //  Set members avatars
         let avatars = [avatarImageView1, avatarImageView2, avatarImageView3]
         var members = [MemberUI]()
-        
         team.members.forEach {
             if $0.name != team.boss.name {
                 members.append($0)
             }
         }
-
-        for index in (0 ... avatars.count - 1) where index <= members.count-1 {
+        
+        for index in (0 ... avatars.count - 1) where index <= members.count - 1 {
             if let imgUrl = members[index].img {
                 guard let url = URL(string: imgUrl) else { return }
                 avatars[index].isHidden = false

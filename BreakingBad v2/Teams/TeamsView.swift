@@ -51,19 +51,18 @@ class TeamsView: UIView {
     }
     
     //    MARK: - public func
-    public func updateUI(teams: [TeamUI]?) {
+    func updateUI(teams: [TeamUI]?) {
         guard let newTeams = teams, !newTeams.isEmpty  else { return checkIsEmpty(isEmpty: true) }
         checkIsEmpty(isEmpty: false)
         self.teams = newTeams
         tableView.reloadData()
     }
     
-    public func deleteRow(index: Int, indexPath: IndexPath) {
-        print("стукнули во deleteRow view")
+    func deleteRow(index: Int, indexPath: IndexPath) {
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
-    public func reload() {
+    func reload() {
         tableView.reloadData()
     }
     //    MARK: - Setup Layout
@@ -108,7 +107,6 @@ extension TeamsView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        print("стукнули во view")
         delegate?.deleteTeam(index: indexPath.row, indexPath: indexPath)
 //        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
@@ -117,7 +115,6 @@ extension TeamsView: UITableViewDataSource {
 // MARK: - extension UITableViewDelegate
 extension TeamsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tableView didSelectRowAt")
         let team = teams[indexPath.row]
         delegate?.didTapTeam(team: team, index: indexPath.row)
     }

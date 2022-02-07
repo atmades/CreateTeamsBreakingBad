@@ -73,7 +73,6 @@ class WeaponCell: UITableViewCell {
             selecthButton.setImage(image, for: .normal)
         }
     }
-    
     private func setupLayout() {
         contentView.addSubview(containerView)
         containerView.snp.makeConstraints { make in
