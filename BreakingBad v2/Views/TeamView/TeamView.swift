@@ -30,7 +30,7 @@ class TeamView: UIView {
     private var nameTeam: String?
     
     //    MARK: - Public Func
-    public func nameValidation(isError: Bool, nameTeam: String?) {
+    public func checkName(isError: Bool, nameTeam: String?) {
         self.errorName = isError
         self.nameTeam = nameTeam
         let index = IndexPath(row: 1, section: 0)

@@ -32,7 +32,7 @@ class TeamViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             } else if let error = error {
                 self.showAlert(error: error)
-                self.newView.nameValidation(isError: isError, nameTeam: self.viewModel.currentNameTeam)
+                self.newView.checkName(isError: isError, nameTeam: self.viewModel.currentNameTeam)
             }
         }
     }

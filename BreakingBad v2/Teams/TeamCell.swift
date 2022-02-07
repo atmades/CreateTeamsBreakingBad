@@ -82,7 +82,7 @@ class TeamCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        imageView.image = nil
+//        imageView.image = nil
         imageView.layer.cornerRadius = 18
         imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor(named: String.color.green.rawValue)?.cgColor
@@ -183,9 +183,6 @@ class TeamCell: UITableViewCell {
     }
     
     func setupUI(team: TeamUI) {
-        avatarImageView1.isHidden = true
-        avatarImageView2.isHidden = true
-        avatarImageView3.isHidden = true
         
         //  Set labels texts
         teamNamelabel.text = team.name
@@ -203,6 +200,10 @@ class TeamCell: UITableViewCell {
         
         //  Set members avatars
         let avatars = [avatarImageView1, avatarImageView2, avatarImageView3]
+        avatars.forEach {
+            $0.isHidden = true
+            $0.image = nil
+        }
         var members = [MemberUI]()
         team.members.forEach {
             if $0.name != team.boss.name {
@@ -237,71 +238,3 @@ class TeamCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-class TeamCell: UITableViewCell {
-    
-    static let reuseId = "TeamCell"
-    
-    //    MARK: - UI Elements
-    var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: String.color.gray80.rawValue)
-        view.layer.cornerRadius = 2
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var teamNamelabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 2
-        label.textAlignment = .left
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private func setupLayout() {
-        contentView.addSubview(containerView)
-        containerView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(12)
-            make.right.equalToSuperview().offset(-12)
-            make.top.equalToSuperview().offset(8)
-            make.bottom.equalToSuperview().offset(-12)
-        }
-        containerView.addSubview(teamNamelabel)
-        teamNamelabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
-            make.top.equalToSuperview().offset(50)
-            make.bottom.equalToSuperview().offset(-50)
-        }
-    }
-    
-    // MARK: - public func
-    func setupUI(teamName: String){
-        teamNamelabel.text = teamName
-    }
-
-    // MARK: - Init and Lifecycle
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .black
-        selectionStyle = .none
-        setupLayout()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-*/
